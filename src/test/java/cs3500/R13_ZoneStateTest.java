@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class R3_AutoTimeIntervalTest {
+class R13_ZoneStateTest {
 
     @BeforeEach
     void setUp() {

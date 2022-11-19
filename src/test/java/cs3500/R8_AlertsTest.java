@@ -28,4 +28,5 @@ class R8_AlertsTest {
         String actualValue = "OFF";
         assertEquals(R8_AlertStates.OFF, R8_AlertStates.valueOf(actualValue));
     }
+
 }

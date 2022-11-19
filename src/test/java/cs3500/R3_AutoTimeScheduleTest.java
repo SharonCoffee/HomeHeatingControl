@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,7 +57,25 @@ class R3_AutoTimeScheduleTest {
         assertTrue(autoTimeSchedule.size() == 0);
     }
 
+    @Test
+    @DisplayName("When Schedule has been set, get correct date, start time and end time from the schedule")
+    void whenScheduleSetGetCorrectDateAndTime() {
+        int year = 2022;
+        int month = 11;
+        int day = 19;
+        int startHour = 6;
+        int startMinutes = 30;
+        int endHour = 8;
+        int endMinutes = 30;
+        autoTimeSchedule.setDate(LocalDate.of(year, month, day));
+        autoTimeSchedule.setStartTime(LocalTime.of(startHour, startMinutes));
+        autoTimeSchedule.setEndTime(LocalTime.of(endHour, endMinutes));
 
+        assertEquals(LocalDate.of(year, month, day), autoTimeSchedule.getDate());
+        assertEquals(LocalTime.of(startHour, startMinutes), autoTimeSchedule.getStartTime());
+        assertEquals(LocalTime.of(endHour, endMinutes), autoTimeSchedule.getEndTime());
+
+    }
 
 
 

@@ -1,24 +1,23 @@
 package cs3500;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.Calendar;
+
 
 public class R3_AutoTimeSchedule {
 
+    public LocalDate date;
+    public LocalTime startTime;
+    public LocalTime endTime;
     public List<String> schedule;
-    //public SortedMap<LocalDateTime, R13_ZoneState> zoneSchedule;
-    Calendar scheduleDate;
 
 
 
     public R3_AutoTimeSchedule() {
-        schedule = new ArrayList<>();
-        //zoneSchedule = new TreeMap<LocalDateTime, R13_ZoneState>();
-        scheduleDate = Calendar.getInstance();
+        schedule = new ArrayList<>();;
     }
 
 
@@ -32,5 +31,30 @@ public class R3_AutoTimeSchedule {
 
     public int size() {
         return schedule.size();
+    }
+
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 }

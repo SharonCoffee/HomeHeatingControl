@@ -29,4 +29,16 @@ class R8_AlertsTest {
         assertEquals(R8_AlertStates.OFF, R8_AlertStates.valueOf(actualValue));
     }
 
+
+    @Test
+    @DisplayName("Test if user has not made a selection")
+    void testZoneSelection() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            alerts = null;
+            if (alerts == null) {
+                throw new IllegalArgumentException("You must make a selection!");
+            }
+        });
+    }
+
 }

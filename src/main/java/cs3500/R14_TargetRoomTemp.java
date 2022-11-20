@@ -24,4 +24,10 @@ public class R14_TargetRoomTemp {
 
         return vTargetRoomTemperature;
     }
+
+    public int decreasetargetRoomtemp() {
+        vTargetRoomTemperature -= 1;
+
+        return vTargetRoomTemperature;
+    }
 }

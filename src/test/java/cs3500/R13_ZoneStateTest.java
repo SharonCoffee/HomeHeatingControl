@@ -52,4 +52,16 @@ class R13_ZoneStateTest {
 
 
     }
+
+    @Test
+    @DisplayName("Test if zone setting states")
+    void zoneStateIsSetting() {
+        String actualValue = "ON";
+
+        zoneState.setZoneState("ON");
+
+        assertEquals(R13_ZoneStateEnum.valueOf(zoneState.getZoneState()), R13_ZoneStateEnum.valueOf(actualValue));
+
+
+    }
 }

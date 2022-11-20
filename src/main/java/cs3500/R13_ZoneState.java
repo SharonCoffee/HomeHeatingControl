@@ -7,4 +7,11 @@ public class R13_ZoneState {
     public String getZoneState() {
         return sInstruct;
     }
+
+    public String setZoneState(String iNewState) {
+
+        sInstruct = iNewState;
+
+        return sInstruct;
+    }
 }

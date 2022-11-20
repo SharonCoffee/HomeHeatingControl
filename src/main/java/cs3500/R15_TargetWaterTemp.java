@@ -20,4 +20,10 @@ public class R15_TargetWaterTemp {
 
         return vTargetWaterTemp;
     }
+
+    public int decreasetemp() {
+        vTargetWaterTemp -= 1;
+
+        return vTargetWaterTemp;
+    }
 }

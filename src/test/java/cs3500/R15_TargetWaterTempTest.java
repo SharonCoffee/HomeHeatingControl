@@ -42,5 +42,17 @@ class R15_TargetWaterTempTest {
         assertEquals(66, targetWaterTemp.increasetemp());
 
     }
+
+    @Test
+    @DisplayName("Should decrease targetwatertemp by one")
+
+    void decreaseTargetWaterTempBy1(){
+        R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
+
+        targetWaterTemp.settargetwatertemp(65);
+
+        assertEquals(64, targetWaterTemp.decreasetemp());
+
+    }
 }
 

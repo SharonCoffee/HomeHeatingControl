@@ -13,4 +13,11 @@ public class R14_TargetRoomTemp {
 
         return vTargetRoomTemperature;
     }
+
+    public int gettargetRoomtemp() {
+
+        vTargetRoomTemperature +=1;
+
+        return vTargetRoomTemperature;
+    }
 }

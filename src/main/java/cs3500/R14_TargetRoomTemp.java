@@ -20,8 +20,10 @@ public class R14_TargetRoomTemp {
     }
 
     public int increasetargetRoomtemp() {
-        vTargetRoomTemperature += 1;
 
+        if (vTargetRoomTemperature < cMaxRoomTemp) {
+            vTargetRoomTemperature += 1;
+        }
         return vTargetRoomTemperature;
     }
 

@@ -25,6 +25,13 @@ class R13_ZoneStateTest {
         assertEquals(R13_ZoneStateEnum.OFF, R13_ZoneStateEnum.valueOf(actualValue));
     }
 
+    @Test
+    @DisplayName("Test if zone is off")
+    void zonestateIsAuto() {
+        String actualValue = "AUTO";
+        assertEquals(R13_ZoneStateEnum.AUTO, R13_ZoneStateEnum.valueOf(actualValue));
+    }
+
 
 
 }

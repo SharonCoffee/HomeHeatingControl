@@ -14,4 +14,10 @@ public class R15_TargetWaterTemp {
     public int gettargetwatertemp() {
         return vTargetWaterTemp;
     }
+
+    public int increasetemp() {
+        vTargetWaterTemp += 1;
+
+        return vTargetWaterTemp;
+    }
 }

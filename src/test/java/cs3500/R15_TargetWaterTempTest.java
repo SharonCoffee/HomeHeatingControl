@@ -37,8 +37,9 @@ class R15_TargetWaterTempTest {
     void increaseTargetWaterTempBy1(){
         R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
 
+        targetWaterTemp.settargetwatertemp(65);
 
-
+        assertEquals(66, targetWaterTemp.increasetemp());
 
     }
 }

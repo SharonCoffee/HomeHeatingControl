@@ -37,7 +37,7 @@ class R6_MinOilLevelTest {
     }
 
     @Test
-    @DisplayName("Add minimum oil levels to ArrayList")
+    @DisplayName("Add minimum oil levels to ArrayList within bounds")
     //Assumption:  Oil tank capacity is 1000L
     //Minimum oil levels can be set between 100L and 500L
     void addMinimumOilLevels() {

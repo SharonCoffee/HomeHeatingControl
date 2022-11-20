@@ -14,9 +14,24 @@ class R2_FrostProtectionTest {
     void setUp() {
 
         frostProtection = new R2_FrostProtection();
+        
     }
 
     // include selection tests here
+    @Test
+    @DisplayName("Test if Frost Protection is turned on")
+    void testStateIsOn() {
+        String actualValue = "ON";
+        assertEquals(R2_FrostProtectionStates.ON, R2_FrostProtectionStates.valueOf(actualValue));
+    }
+
+    @Test
+    @DisplayName("Test if Frpst Protection is turned off")
+    void testStateIsOff() {
+        String actualValue = "OFF";
+        assertEquals(R2_FrostProtectionStates.OFF, R2_FrostProtectionStates.valueOf(actualValue));
+    }
+
 
 
 

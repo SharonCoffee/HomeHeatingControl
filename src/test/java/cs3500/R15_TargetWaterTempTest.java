@@ -54,5 +54,17 @@ class R15_TargetWaterTempTest {
         assertEquals(64, targetWaterTemp.decreasetemp());
 
     }
+
+    @Test
+    @DisplayName("Shouldn't increase targetwatertemp due to hitting the minimum water temperature ")
+
+    void hittingTargetWaterTempMin(){
+        R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
+
+        targetWaterTemp.settargetwatertemp(55);
+
+        assertEquals(55, targetWaterTemp.decreasetemp());
+
+    }
 }
 

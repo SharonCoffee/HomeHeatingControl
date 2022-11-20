@@ -8,28 +8,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class R13_ZoneStateTest {
 
-    R13_ZoneState zonestate;
+    R13_ZoneState zoneState;
     @BeforeEach
-    void setUp() { zonestate = new R13_ZoneState();}
+    void setUp() { zoneState = new R13_ZoneState();}
         @Test
         @DisplayName("Test if zone is on")
-        void zonestateIsOn() {
+        void zoneStateIsOn() {
             String actualValue = "ON";
             assertEquals(R13_ZoneStateEnum.ON, R13_ZoneStateEnum.valueOf(actualValue));
         }
 
     @Test
     @DisplayName("Test if zone is off")
-    void zonestateIsOff() {
+    void zoneStateIsOff() {
         String actualValue = "OFF";
         assertEquals(R13_ZoneStateEnum.OFF, R13_ZoneStateEnum.valueOf(actualValue));
     }
 
     @Test
-    @DisplayName("Test if zone is off")
-    void zonestateIsAuto() {
+    @DisplayName("Test if zone on auto mode")
+    void zoneStateIsAuto() {
         String actualValue = "AUTO";
         assertEquals(R13_ZoneStateEnum.AUTO, R13_ZoneStateEnum.valueOf(actualValue));
+    }
+
+    @Test
+    @DisplayName("Test if zone on boost mode")
+    void zoneStateIsBoost() {
+        String actualValue = "BOOST";
+        assertEquals(R13_ZoneStateEnum.BOOST, R13_ZoneStateEnum.valueOf(actualValue));
     }
 
 

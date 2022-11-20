@@ -8,18 +8,18 @@ public class R15_TargetWaterTemp {
 
     int cMaxWaterTemp = 80;
 
-    public int settargetwatertemp(int iTargetWaterTemp) {
+    public int setTargetWaterTemp(int iTargetWaterTemp) {
 
         vTargetWaterTemp = iTargetWaterTemp;
 
         return vTargetWaterTemp;
     }
 
-    public int gettargetwatertemp() {
+    public int getTargetWaterTemp() {
         return vTargetWaterTemp;
     }
 
-    public int increasetemp() {
+    public int increaseTargetWaterTemp() {
         if (vTargetWaterTemp < cMaxWaterTemp) {
             vTargetWaterTemp += 1;
         }
@@ -27,7 +27,7 @@ public class R15_TargetWaterTemp {
         return vTargetWaterTemp;
     }
 
-    public int decreasetemp() {
+    public int decreaseTargetWaterTemp() {
         if (vTargetWaterTemp > cMinWaterTemp) {
             vTargetWaterTemp -= 1;
         }

@@ -20,7 +20,9 @@ public class R15_TargetWaterTemp {
     }
 
     public int increasetemp() {
-        vTargetWaterTemp += 1;
+        if (vTargetWaterTemp < cMaxWaterTemp) {
+            vTargetWaterTemp += 1;
+        }
 
         return vTargetWaterTemp;
     }

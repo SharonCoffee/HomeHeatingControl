@@ -56,7 +56,7 @@ class R15_TargetWaterTempTest {
     }
 
     @Test
-    @DisplayName("Shouldn't increase targetwatertemp due to hitting the minimum water temperature ")
+    @DisplayName("Shouldn't decrease targetwatertemp due to hitting the minimum water temperature ")
 
     void hittingTargetWaterTempMin(){
         R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
@@ -64,6 +64,18 @@ class R15_TargetWaterTempTest {
         targetWaterTemp.settargetwatertemp(55);
 
         assertEquals(55, targetWaterTemp.decreasetemp());
+
+    }
+
+    @Test
+    @DisplayName("Shouldn't increase targetwatertemp due to hitting the maximum water temperature ")
+
+    void hittingTargetWaterTempMax(){
+        R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
+
+        targetWaterTemp.settargetwatertemp(80);
+
+        assertEquals(80, targetWaterTemp.increasetemp());
 
     }
 }

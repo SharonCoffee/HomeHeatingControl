@@ -9,14 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class R13_ZoneStateTest {
 
     R13_ZoneState zoneState;
+
     @BeforeEach
-    void setUp() { zoneState = new R13_ZoneState();}
-        @Test
-        @DisplayName("Test if zone is on")
-        void zoneStateIsOn() {
-            String actualValue = "ON";
-            assertEquals(R13_ZoneStateEnum.ON, R13_ZoneStateEnum.valueOf(actualValue));
-        }
+    void setUp() {
+        zoneState = new R13_ZoneState();
+    }
+
+    @Test
+    @DisplayName("Test if zone is on")
+    void zoneStateIsOn() {
+        String actualValue = "ON";
+        assertEquals(R13_ZoneStateEnum.ON, R13_ZoneStateEnum.valueOf(actualValue));
+    }
 
     @Test
     @DisplayName("Test if zone is off")
@@ -39,6 +43,13 @@ class R13_ZoneStateTest {
         assertEquals(R13_ZoneStateEnum.BOOST, R13_ZoneStateEnum.valueOf(actualValue));
     }
 
+    @Test
+    @DisplayName("Test if zone getting states")
+    void zoneStateIsGetting() {
+        String actualValue = "OFF";
+
+        assertEquals(R13_ZoneStateEnum.valueOf(zoneState.getZoneState()), R13_ZoneStateEnum.valueOf(actualValue));
 
 
+    }
 }

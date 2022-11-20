@@ -31,7 +31,7 @@ class R3_AutoTimeScheduleTest {
 
 
     @Test
-    @DisplayName("Test schedule start results in a stack size of one")
+    @DisplayName("When start command is pushed onto the stack, the auto time schedule results in a stack size of one")
     void testStart() {
 
         final String EXPECTED_VALUE = "Start";
@@ -41,7 +41,7 @@ class R3_AutoTimeScheduleTest {
 
 
     @Test
-    @DisplayName("When start is pushed off the schedule, the schedule stops and returns the value that was pushed off")
+    @DisplayName("When start command is pushed off the schedule, the schedule stops and returns the value that was pushed off")
     void testStop() {
 
         final String EXPECTED_VALUE = "Start";
@@ -51,7 +51,7 @@ class R3_AutoTimeScheduleTest {
     }
 
     @Test
-    @DisplayName("When start is pushed off the schedule, the schedule should be empty")
+    @DisplayName("When start command is pushed off the schedule, the schedule size should be empty")
     void testScheduleSizeAfterPop() {
         testStop();
         assertTrue(autoTimeSchedule.size() == 0);
@@ -77,6 +77,7 @@ class R3_AutoTimeScheduleTest {
 
     }
 
+    // continue on from here
 
 
 }

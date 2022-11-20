@@ -20,4 +20,26 @@ class R15_TargetWaterTempTest {
 
         assertEquals(70,targetWaterTemp.settargetwatertemp(70));
     }
+
+    @Test
+    @DisplayName("Should get targetwatertemp which is set to 65")
+
+    void getTargetWaterTempTo80(){
+        R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
+
+        targetWaterTemp.settargetwatertemp(65);
+
+        assertEquals(65,targetWaterTemp.gettargetwatertemp());
+    }
+    @Test
+    @DisplayName("Should increase targetwatertemp by one")
+
+    void increaseTargetWaterTempBy1(){
+        R15_TargetWaterTemp targetWaterTemp = new R15_TargetWaterTemp();
+
+
+
+
+    }
 }
+

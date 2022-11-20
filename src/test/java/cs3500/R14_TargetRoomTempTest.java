@@ -24,11 +24,22 @@ class R14_TargetRoomTempTest {
     @Test
     @DisplayName("Should get targetroomtemp which is 20")
 
-    void getTargetRoomTempTo70(){
+    void getTargetRoomTemp20(){
         R14_TargetRoomTemp targetRoomTemp = new R14_TargetRoomTemp();
 
         targetRoomTemp.settargetRoomtemp(20);
 
         assertEquals(20,targetRoomTemp.gettargetRoomtemp());
+    }
+
+    @Test
+    @DisplayName("Should increases targetroomtemp to 21")
+
+    void increaseTargetRoomTempTo21(){
+        R14_TargetRoomTemp targetRoomTemp = new R14_TargetRoomTemp();
+
+        targetRoomTemp.settargetRoomtemp(20);
+
+        assertEquals(21,targetRoomTemp.increasetargetRoomtemp());
     }
 }

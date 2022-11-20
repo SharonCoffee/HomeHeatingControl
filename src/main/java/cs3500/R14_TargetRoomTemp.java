@@ -28,8 +28,10 @@ public class R14_TargetRoomTemp {
     }
 
     public int decreasetargetRoomtemp() {
-        vTargetRoomTemperature -= 1;
 
+        if (vTargetRoomTemperature > cMinRoomTemp) {
+            vTargetRoomTemperature -= 1;
+        }
         return vTargetRoomTemperature;
     }
 }

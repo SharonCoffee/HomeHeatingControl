@@ -55,7 +55,7 @@ class R14_TargetRoomTempTest {
     }
 
     @Test
-    @DisplayName("Should increases targetroomtemp to 21")
+    @DisplayName("Should not increase targetroomtemp since it would go above the max room temperature")
 
     void hitTargetRoomTempMaximumTemp(){
         R14_TargetRoomTemp targetRoomTemp = new R14_TargetRoomTemp();
@@ -63,5 +63,16 @@ class R14_TargetRoomTempTest {
         targetRoomTemp.settargetRoomtemp(26);
 
         assertEquals(26,targetRoomTemp.increasetargetRoomtemp());
+    }
+
+    @Test
+    @DisplayName("Should not decrease targetroomtemp since it would go below the min room temperature")
+
+    void hitTargetRoomTempMinimumTemp(){
+        R14_TargetRoomTemp targetRoomTemp = new R14_TargetRoomTemp();
+
+        targetRoomTemp.settargetRoomtemp(18);
+
+        assertEquals(18,targetRoomTemp.decreasetargetRoomtemp());
     }
 }

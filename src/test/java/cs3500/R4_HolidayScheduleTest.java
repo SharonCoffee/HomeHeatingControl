@@ -54,18 +54,21 @@ class R4_HolidayScheduleTest {
     @Test
     @DisplayName("When holiday Schedule has been set, get correct date, start time and end time from the schedule")
     void whenHolidayScheduleSetGetCorrectDateAndTime() {
-        int year = 2022;
-        int month = 11;
-        int day = 19;
+        int startYear = 2022;
+        int startMonth = 11;
+        int startDay = 19;
         int startHour = 6;
         int startMinutes = 30;
+        int endYear = 2022;
+        int endMonth = 11;
+        int endDay = 19;
         int endHour = 8;
         int endMinutes = 30;
-        holidaySchedule.setDate(LocalDate.of(year, month, day));
+        holidaySchedule.setDate(LocalDate.of(startYear, startMonth, startDay));
         holidaySchedule.setStartTime(LocalTime.of(startHour, startMinutes));
         holidaySchedule.setEndTime(LocalTime.of(endHour, endMinutes));
 
-        assertEquals(LocalDate.of(year, month, day), holidaySchedule.getDate());
+        assertEquals(LocalDate.of(startYear, startMonth, startDay), holidaySchedule.getDate());
         assertEquals(LocalTime.of(startHour, startMinutes), holidaySchedule.getStartTime());
         assertEquals(LocalTime.of(endHour, endMinutes), holidaySchedule.getEndTime());
 

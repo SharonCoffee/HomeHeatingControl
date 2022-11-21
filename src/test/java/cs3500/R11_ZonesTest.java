@@ -20,6 +20,10 @@ class R11_ZonesTest {
 
     R14_TargetRoomTemp targetRoomTemp;
 
+    R18_RoomThermometer currentRoomTemp;
+
+    R19_WaterThermometer currentWaterTemp;
+
     @BeforeEach
     void setUp()  {
        zones = new R11_Zones();
@@ -29,13 +33,31 @@ class R11_ZonesTest {
        targetWaterTemp = new R15_TargetWaterTemp();
 
        targetRoomTemp = new R14_TargetRoomTemp();
+
+
+
+        /* Should use this to get both current temperature, but I have empty thermometer classes
+        currentRoomTemp = new R18_RoomThermometer();
+
+        currentWaterTemp = new R19_WaterThermometer();
+        */
     }
 
     @Test
     @DisplayName("Test to see can get aArrayOfZoneAttributes")
-    void zoneAttributesAreGet() {
-        Object[] testArray = new Object[6];
+    void zoneAttributesArrayAreGet() {
+        Object[] testArray = {"Unknown", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
-        assertArrayEquals(testArray, zones.getZoneAttributes());
+        assertArrayEquals(testArray, zones.getZoneAllAttributes());
+    }
+
+    @Test
+    @DisplayName("Test to see can get values in aArrayOfZoneAttributes")
+    void zoneAttributesAreGet() {
+        Object[] testArray = {"Unknown", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+
+        assertEquals(testArray[2], zones.getZoneAttribute(2));
+
+        assertEquals(testArray[0], zones.getZoneAttribute(0));
     }
 }

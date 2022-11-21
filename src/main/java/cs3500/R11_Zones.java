@@ -8,9 +8,13 @@ public class R11_Zones {
 
     R14_TargetRoomTemp targetRoomTemp = new R14_TargetRoomTemp();
 
-    Object[] aArrayOfZoneAttributes = new Object[6];
+    Object[] aArrayOfZoneAttributes = {"Unknown", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
-    public Object[] getZoneAttributes() {
+    public Object[] getZoneAllAttributes() {
         return aArrayOfZoneAttributes;
+    }
+
+    public Object getZoneAttribute(int i) {
+        return aArrayOfZoneAttributes[i];
     }
 }

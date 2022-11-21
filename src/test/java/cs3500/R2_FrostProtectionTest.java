@@ -17,7 +17,6 @@ class R2_FrostProtectionTest {
         
     }
 
-    // include selection tests here
     @Test
     @DisplayName("Test if Frost Protection is turned on")
     void testStateIsOn() {
@@ -31,10 +30,6 @@ class R2_FrostProtectionTest {
         String actualValue = "OFF";
         assertEquals(R2_FrostProtectionStates.OFF, R2_FrostProtectionStates.valueOf(actualValue));
     }
-
-
-
-
 
     @Test
     @DisplayName("Test if user has not made a selection")

@@ -46,7 +46,7 @@ class R11_ZonesTest {
     @Test
     @DisplayName("Test to see can get aArrayOfZoneAttributes")
     void zoneAttributesArrayAreGet() {
-        Object[] testArray = {"Unknown", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+        Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
         assertArrayEquals(testArray, zones.getZoneAllAttributes());
     }
@@ -54,7 +54,7 @@ class R11_ZonesTest {
     @Test
     @DisplayName("Test to see can get values in aArrayOfZoneAttributes")
     void zoneAttributesAreGet() {
-        Object[] testArray = {"Unknown", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+        Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
         assertEquals(testArray[2], zones.getZoneAttribute(2));
 
@@ -62,12 +62,40 @@ class R11_ZonesTest {
     }
 
     @Test
-    @DisplayName("Test to see can get values in aArrayOfZoneAttributes")
+    @DisplayName("Test to see can set values in aArrayOfZoneAttributes")
     void zoneAttributesAreSet() {
-        Object[] testArray = {"Downstairs", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+        Object[] testArray = {"Downstairs", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
         zones.setZoneAtrribute(0, "Downstairs");
 
         assertEquals(testArray[0], zones.getZoneAttribute(0));
+    }
+
+    @Test
+    @DisplayName("Test to see set values must correct types in aArrayOfZoneAttributes")
+    void zoneAttributesAreSetCorrectly() {
+        Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+
+        zones.setZoneAtrribute(0, 21);
+
+        zones.setZoneAtrribute(3, "ON");
+
+        assertEquals(testArray[0], zones.getZoneAttribute(0));
+
+        assertEquals(testArray[3], zones.getZoneAttribute(3));
+    }
+
+    @Test
+    @DisplayName("Test to stop targetRoomTemp and targetWaterTemp set outside max and min values")
+    void zoneTempsAreSetWithinMinAndMax() {
+        Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+
+        zones.setZoneAtrribute(2, 30);
+
+        zones.setZoneAtrribute(4, 100);
+
+        assertEquals(testArray[0], zones.getZoneAttribute(0));
+
+        assertEquals(testArray[3], zones.getZoneAttribute(3));
     }
 }

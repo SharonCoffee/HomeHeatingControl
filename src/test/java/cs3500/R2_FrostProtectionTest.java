@@ -26,7 +26,7 @@ class R2_FrostProtectionTest {
     }
 
     @Test
-    @DisplayName("Test if Frpst Protection is turned off")
+    @DisplayName("Test if Frost Protection is turned off")
     void testStateIsOff() {
         String actualValue = "OFF";
         assertEquals(R2_FrostProtectionStates.OFF, R2_FrostProtectionStates.valueOf(actualValue));

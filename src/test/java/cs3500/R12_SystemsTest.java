@@ -23,4 +23,14 @@ class R12_SystemsTest {
 
         assertEquals(testName, systems.getName());
     }
+
+    @Test
+    @DisplayName("Test if can set home name")
+    void setSystemName() {
+        String testName = "Holiday home";
+
+        systems.setName("Holiday home");
+
+        assertEquals(testName, systems.getName());
+    }
 }

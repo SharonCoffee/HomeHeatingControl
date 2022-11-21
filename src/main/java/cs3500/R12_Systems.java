@@ -7,4 +7,8 @@ public class R12_Systems {
     public String getName() {
         return systemName;
     }
+
+    public void setName(String newName) {
+        systemName = newName;
+    }
 }

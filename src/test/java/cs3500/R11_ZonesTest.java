@@ -60,4 +60,14 @@ class R11_ZonesTest {
 
         assertEquals(testArray[0], zones.getZoneAttribute(0));
     }
+
+    @Test
+    @DisplayName("Test to see can get values in aArrayOfZoneAttributes")
+    void zoneAttributesAreSet() {
+        Object[] testArray = {"Downstairs", "OFF", targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
+
+        zones.setZoneAtrribute(0, "Downstairs");
+
+        assertEquals(testArray[0], zones.getZoneAttribute(0));
+    }
 }

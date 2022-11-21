@@ -14,7 +14,12 @@ public class R11_Zones {
         return aArrayOfZoneAttributes;
     }
 
-    public Object getZoneAttribute(int i) {
-        return aArrayOfZoneAttributes[i];
+    public Object getZoneAttribute(int index) {
+        return aArrayOfZoneAttributes[index];
+    }
+
+
+    public void setZoneAtrribute(int index, Object newAttribute) {
+        aArrayOfZoneAttributes[index] = newAttribute;
     }
 }

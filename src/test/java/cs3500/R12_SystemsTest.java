@@ -100,4 +100,12 @@ class R12_SystemsTest {
         assertEquals(testInt, systems.getZoneTargetWaterTemp(0));
 
     }
+    @Test
+    @DisplayName("Test if can get system's zone's currentWaterTemp")
+    void getSystemZonesCurrentWaterTemp() {
+        int testInt = 55;
+
+        assertEquals(testInt, systems.getZoneCurrentWaterTemp(0));
+
+    }
 }

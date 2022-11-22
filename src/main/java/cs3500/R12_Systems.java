@@ -46,4 +46,8 @@ public class R12_Systems {
     public int getZoneTargetWaterTemp(int index) {
         return (int) systemZones[index].getZoneAttribute(4);
     }
+
+    public int getZoneCurrentWaterTemp(int index) {
+        return (int) systemZones[index].getZoneAttribute(5);
+    }
 }

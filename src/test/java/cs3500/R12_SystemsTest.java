@@ -59,4 +59,12 @@ class R12_SystemsTest {
         assertArrayEquals(testArray, systems.getZone(0).getZoneAllAttributes());
 
     }
+    @Test
+    @DisplayName("Test if can get system's zone's name")
+    void getSystemZonesName() {
+       String testString = "Unknown";
+
+       assertEquals(testString, systems.getZoneName(0));
+
+    }
 }

@@ -25,4 +25,9 @@ public class R12_Systems {
     public R11_Zones getZone(int index) {
         return systemZones[index];
     }
+
+
+    public String getZoneName(int index) {
+        return (String) systemZones[index].getZoneAttribute(0);
+    }
 }

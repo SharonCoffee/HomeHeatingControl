@@ -84,4 +84,12 @@ class R12_SystemsTest {
         assertEquals(testInt, systems.getZoneTargetRoomTemp(0));
 
     }
+    @Test
+    @DisplayName("Test if can get system's zone's currentRoomTemp")
+    void getSystemZonesCurrentRoomTemp() {
+        int testInt = 18;
+
+        assertEquals(testInt, systems.getZoneCurrentRoomTemp(0));
+
+    }
 }

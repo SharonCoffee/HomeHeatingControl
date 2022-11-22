@@ -38,4 +38,8 @@ public class R12_Systems {
     public int getZoneTargetRoomTemp(int index) {
         return (int) systemZones[index].getZoneAttribute(2);
     }
+
+    public int getZoneCurrentRoomTemp(int index) {
+        return (int) systemZones[index].getZoneAttribute(3);
+    }
 }

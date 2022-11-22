@@ -4,10 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class R11_ZonesTest {
@@ -66,7 +62,7 @@ class R11_ZonesTest {
     void zoneAttributesAreSet() {
         Object[] testArray = {"Downstairs", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
-        zones.setZoneAtrribute(0, "Downstairs");
+        zones.setZoneAttribute(0, "Downstairs");
 
         assertEquals(testArray[0], zones.getZoneAttribute(0));
     }
@@ -76,9 +72,9 @@ class R11_ZonesTest {
     void zoneAttributesAreSetCorrectly() {
         Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
-        zones.setZoneAtrribute(0, 21);
+        zones.setZoneAttribute(0, 21);
 
-        zones.setZoneAtrribute(3, "ON");
+        zones.setZoneAttribute(3, "ON");
 
         assertEquals(testArray[0], zones.getZoneAttribute(0));
 
@@ -90,9 +86,9 @@ class R11_ZonesTest {
     void zoneTempsAreSetWithinMinAndMax() {
         Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
-        zones.setZoneAtrribute(2, 30);
+        zones.setZoneAttribute(2, 30);
 
-        zones.setZoneAtrribute(4, 100);
+        zones.setZoneAttribute(4, 100);
 
         assertEquals(testArray[0], zones.getZoneAttribute(0));
 

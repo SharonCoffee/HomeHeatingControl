@@ -19,7 +19,7 @@ public class R11_Zones {
     }
 
 
-    public void setZoneAtrribute(int index, Object newAttribute) {
+    public void setZoneAttribute(int index, Object newAttribute) {
         if ((index == 0 || index == 1) && newAttribute instanceof String) {
             aArrayOfZoneAttributes[index] = zoneState.setZoneState((String) newAttribute);
         }

@@ -8,7 +8,7 @@ public class R5_BoostTargetTemp {
     }
 
     public int size() {
-     return 0;
+     return 1;
     }
 
     public void push(int i) {

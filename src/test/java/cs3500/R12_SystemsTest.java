@@ -69,11 +69,19 @@ class R12_SystemsTest {
     }
 
     @Test
-    @DisplayName("Test if can get system's zone's name")
+    @DisplayName("Test if can get system's zone's state")
     void getSystemZonesState() {
         String testString = "OFF";
 
         assertEquals(testString, systems.getZoneState(0));
+
+    }
+    @Test
+    @DisplayName("Test if can get system's zone's targetRoomTemp")
+    void getSystemZonesTargetRoomTemp() {
+        int testInt = 18;
+
+        assertEquals(testInt, systems.getZoneTargetRoomTemp(0));
 
     }
 }

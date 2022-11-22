@@ -34,4 +34,8 @@ public class R12_Systems {
     public String getZoneState(int index) {
         return (String) systemZones[index].getZoneAttribute(1);
     }
+
+    public int getZoneTargetRoomTemp(int index) {
+        return (int) systemZones[index].getZoneAttribute(2);
+    }
 }

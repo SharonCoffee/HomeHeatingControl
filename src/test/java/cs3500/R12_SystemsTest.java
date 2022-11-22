@@ -67,4 +67,13 @@ class R12_SystemsTest {
        assertEquals(testString, systems.getZoneName(0));
 
     }
+
+    @Test
+    @DisplayName("Test if can get system's zone's name")
+    void getSystemZonesState() {
+        String testString = "OFF";
+
+        assertEquals(testString, systems.getZoneState(0));
+
+    }
 }

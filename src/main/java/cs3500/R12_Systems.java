@@ -30,4 +30,8 @@ public class R12_Systems {
     public String getZoneName(int index) {
         return (String) systemZones[index].getZoneAttribute(0);
     }
+
+    public String getZoneState(int index) {
+        return (String) systemZones[index].getZoneAttribute(1);
+    }
 }

@@ -25,7 +25,7 @@ class WB3_OnStateTest {
 
     @Test
     @DisplayName("Test if user/operator selects on state and system turns on if current room temperature is less than target room temperature")
-    public void testOnProgramStateSelectionForRoomTemp() {
+    void testOnProgramStateSelectionForRoomTemp() {
         // select On program state in UI
         onStateController.setProgramState("ON");
 
@@ -46,7 +46,7 @@ class WB3_OnStateTest {
 
     @Test
     @DisplayName("Test if user/operator selects on state and system turns on if current water temperature is less than target water temperature")
-    public void testOnProgramStateSelectionForWaterTemp() {
+    void testOnProgramStateSelectionForWaterTemp() {
         // select On program state in UI
         onStateController.setProgramState("ON");
 

@@ -17,7 +17,7 @@ class WB4_BoostStateTest {
 
     @Test
     @DisplayName("Test if user/operator selects boost, that the boost time setting will apply to all zones and switch boiler on.  Else when boost time period ends, boiler switches off")
-    public void testBoostProgram() {
+    void testBoostProgram() {
         //Test data
         int boostSetting = 1; //1, 2, or 3 hours
 

@@ -17,8 +17,8 @@ class R16_BoostTimesTest {
     }
 
     @Test
-    @DisplayName("Test if selected time frame matches an item in the list of time frames")
-    void testSelectTimeFrame() {
+    @DisplayName("Test if selected 60 minute time frame matches an item in the list of time frames")
+    void testSelectSixtyMinutesTimeFrame() {
         //arrange
         int[] boostTimeFrames = {60, 120, 180};
         int expected = 60;
@@ -35,11 +35,51 @@ class R16_BoostTimesTest {
         assertEquals(expected, actual);
     }
 
+
+    @Test
+    @DisplayName("Test if selected 120 minute time frame matches an item in the list of time frames")
+    void testSelectOneTwentyMinutesTimeFrame() {
+        //arrange
+        int[] boostTimeFrames = {60, 120, 180};
+        int expected = 120;
+        int actual = 0;
+
+        //act
+        for (int item : boostTimeFrames) {
+            if (item == expected) {
+                actual = item;
+            }
+        }
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("Test if selected 180 minute time frame matches an item in the list of time frames")
+    void testSelectOneEightyMinutesTimeFrame() {
+        //arrange
+        int[] boostTimeFrames = {60, 120, 180};
+        int expected = 120;
+        int actual = 0;
+
+        //act
+        for (int item : boostTimeFrames) {
+            if (item == expected) {
+                actual = item;
+            }
+        }
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
     @Test
     @DisplayName("Test if selected time frame is outside an item in the list of time frames")
     void testUserSelectsInvalidTimeFrame() {
-        String[] validTimeFrames = new String[] {"60min", "120min", "180min"};
-        String selectedTimeframe = "30min";
-        assertFalse(Arrays.asList(validTimeFrames).contains(selectedTimeframe));
+        int[] boostTimeFrames = {60, 120, 180};
+        int selectedTimeframe = 30;
+        assertFalse(Arrays.asList(boostTimeFrames).contains(selectedTimeframe));
     }
 }

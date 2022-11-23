@@ -15,10 +15,8 @@ public class R20_BoostThermometer {
         this.boostTimeRemaining = boostTimeRemaining;
     }
 
-    public int setBoostState(int currentRoomTemperature, int targetRoomTemperature, int boostDuration) {
-        this.currentRoomTemperature = currentRoomTemperature;
-        this.targetRoomTemperature = targetRoomTemperature;
-        this.boostDuration = boostDuration;
-        return currentRoomTemperature +  targetRoomTemperature;
+    public String setBoostState(int currentRoomTemperature, int targetRoomTemperature, int boostDuration) {
+        return "Current Room Temperature: " + currentRoomTemperature + "Target Room Temperature: " + targetRoomTemperature+ "Boost Duration: " + boostDuration;
+
     }
 }

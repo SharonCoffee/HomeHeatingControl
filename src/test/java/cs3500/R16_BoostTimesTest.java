@@ -82,4 +82,36 @@ class R16_BoostTimesTest {
         int selectedTimeframe = 30;
         assertFalse(Arrays.asList(boostTimeFrames).contains(selectedTimeframe));
     }
+
+    @Test
+    @DisplayName("Test if boost state turns on if boost time is selected by user.")
+    void whenUserSelects60MinsFromBoostArray_thenBoostStateIsTurnedOn() {
+        // given
+        int[] boostArray = { 60, 120, 180 };
+        int userSelection = 60;
+
+        // when
+        boostTimePeriod.selectTime(userSelection);
+
+        // then
+        assertTrue(boostTimePeriod.isBoostStateOn());
+        assertEquals(60, boostTimePeriod.getUserSelection());
+    }
+
+    @Test
+    @DisplayName("Test if boost state turns off when boost time period has ended.")
+    void when60MinsIsEnded_thenBoostStateIsTurnedOff() {
+        // given
+        int[] boostArray = { 60, 120, 180 };
+        int userSelection = 60;
+        boostTimePeriod.selectTime(userSelection);
+
+        // when
+        boostTimePeriod.endBoost();
+
+        // then
+        assertTrue(boostTimePeriod.isBoostStateOff());
+        assertEquals(0, boostTimePeriod.getRemainingTime());
+    }
+
 }

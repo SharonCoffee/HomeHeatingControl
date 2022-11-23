@@ -30,17 +30,15 @@ class R11_ZonesTest {
 
        targetRoomTemp = new R14_TargetRoomTemp();
 
+       currentRoomTemp = new R18_RoomThermometer();
 
+       currentWaterTemp = new R19_WaterThermometer();
 
-        /* Should use this to get both current temperature, but I have empty thermometer classes
-        currentRoomTemp = new R18_RoomThermometer();
-
-        currentWaterTemp = new R19_WaterThermometer();
-        */
     }
 
+
     @Test
-    @DisplayName("Test to see can get aArrayOfZoneAttributes")
+    @DisplayName("Test to see can get an ArrayOfZoneAttributes")
     void zoneAttributesArrayAreGet() {
         Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
@@ -48,7 +46,7 @@ class R11_ZonesTest {
     }
 
     @Test
-    @DisplayName("Test to see can get values in aArrayOfZoneAttributes")
+    @DisplayName("Test to see can get values in an ArrayOfZoneAttributes")
     void zoneAttributesAreGet() {
         Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
@@ -58,7 +56,7 @@ class R11_ZonesTest {
     }
 
     @Test
-    @DisplayName("Test to see can set values in aArrayOfZoneAttributes")
+    @DisplayName("Test to see can set values in an ArrayOfZoneAttributes")
     void zoneAttributesAreSet() {
         Object[] testArray = {"Downstairs", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 
@@ -68,7 +66,7 @@ class R11_ZonesTest {
     }
 
     @Test
-    @DisplayName("Test to see set values must correct types in aArrayOfZoneAttributes")
+    @DisplayName("Test to see set values must correct types in an ArrayOfZoneAttributes")
     void zoneAttributesAreSetCorrectly() {
         Object[] testArray = {"Unknown", zoneState.getZoneState(), targetRoomTemp.getTargetRoomTemp(), 18, targetWaterTemp.getTargetWaterTemp(), 55};
 

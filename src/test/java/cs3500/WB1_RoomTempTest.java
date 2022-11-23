@@ -17,7 +17,7 @@ class WB1_RoomTempTest {
     }
 
     @Test
-    @DisplayName("Test if room temperature set by user is valid")
+    @DisplayName("Test if target room temperature set by user is valid")
     void testSetTemp() {
         int targetRoomTemp = 20;
 
@@ -31,7 +31,7 @@ class WB1_RoomTempTest {
     }
 
     @Test
-    @DisplayName("Test if room temperature set by user is invalid")
+    @DisplayName("Test if target room temperature set by user is invalid")
     void testSetTempInvalid() {
         int targetRoomTemp = 30;
 

@@ -18,7 +18,7 @@ class WB2_WaterTempTest {
     }
 
     @Test
-    @DisplayName("Test if water temperature set by user is valid")
+    @DisplayName("Test if target water temperature set by user is valid")
     void testSetTemp() {
         int targetWaterTemp = 20;
 
@@ -32,7 +32,7 @@ class WB2_WaterTempTest {
     }
 
     @Test
-    @DisplayName("Test if water temperature set by user is invalid")
+    @DisplayName("Test if target water temperature set by user is invalid")
     void testSetTempInvalid() {
         int targetWaterTemp = 30;
 

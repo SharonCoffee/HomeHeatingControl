@@ -64,4 +64,42 @@ class R6_MinOilLevelTest {
 
     }
 
+
+    @Test
+    @DisplayName("User selects value from the Minimum Oil Level Array and it returns true")
+    void testSelectFromArrayList() {
+        int EXPECTED_MINIMUM_OIL_VALUE = 100;
+        while (minOilLevel.size() < 5) {
+            minOilLevel.push(EXPECTED_MINIMUM_OIL_VALUE);
+            EXPECTED_MINIMUM_OIL_VALUE += 100;
+        }
+        int vMinOilLevel = 200;
+        assertTrue(minOilLevel.contains(vMinOilLevel));
+    }
+
+    @Test
+    @DisplayName("User selects value below first value in the Minimum Oil Level Array and it returns false")
+    void testInvalidLowerValueSelectFromArrayList() {
+        int EXPECTED_MINIMUM_OIL_VALUE = 100;
+        while (minOilLevel.size() < 5) {
+            minOilLevel.push(EXPECTED_MINIMUM_OIL_VALUE);
+            EXPECTED_MINIMUM_OIL_VALUE += 100;
+        }
+        int vMinOilLevel = 50;
+        assertFalse(minOilLevel.contains(vMinOilLevel));
+    }
+
+
+    @Test
+    @DisplayName("User selects value above last value in the Minimum Oil Level Array and it returns false")
+    void testInvalidHigherValueSelectFromArrayList() {
+        int EXPECTED_MINIMUM_OIL_VALUE = 100;
+        while (minOilLevel.size() < 5) {
+            minOilLevel.push(EXPECTED_MINIMUM_OIL_VALUE);
+            EXPECTED_MINIMUM_OIL_VALUE += 100;
+        }
+        int vMinOilLevel = 550;
+        assertFalse(minOilLevel.contains(vMinOilLevel));
+    }
+
 }

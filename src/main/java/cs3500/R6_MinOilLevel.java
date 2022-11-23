@@ -43,4 +43,16 @@ public class R6_MinOilLevel {
     private String oilLevelTooLow(String minimumMessage) {
         return minimumMessage;
     }
+
+    public boolean contains(int vMinOilLevel) {
+        for (int i = 0; i < oilLevel.size(); i++) {
+            if (vMinOilLevel == oilLevel.get(i)) {
+                return true;
+            } else {
+                continue;
+            }
+        }
+        return false;
+    }
+
 }

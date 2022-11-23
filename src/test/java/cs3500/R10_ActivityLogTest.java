@@ -86,8 +86,22 @@ class R10_ActivityLogTest {
 
     }
 
-    // Insert i)	Holiday time interval schedule on
-    // Insert j)	Holiday time interval schedule off
+    @Test
+    @DisplayName("Holiday Time interval schedule has been changed.")
+    void testHolidayTimeIntervalScheduleHasChanged() {
+        int START_YEAR = 2022;
+        int START_MONTH = 11;
+        int START_DAY = 20;
+        int START_HOUR = 19;
+        int START_MINUTES = 30;
+        int END_YEAR = 2022;
+        int END_MONTH = 12;
+        int END_DAY = 20;
+        int END_HOUR = 21;
+        int END_MINUTES = 00;
+        assertTrue(activityLog.HolidayTimeIntervalScheduleChangeIsSuccessfullyLogged(START_YEAR, START_MONTH, START_DAY, START_HOUR, START_MINUTES, END_YEAR, END_MONTH, END_DAY, END_HOUR, END_MINUTES));
+
+    }
 
     @Test
     @DisplayName("Frost Protection has been turned on")

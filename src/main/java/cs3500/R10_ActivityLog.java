@@ -12,8 +12,14 @@ public class R10_ActivityLog {
     int year;
     int month;
     int day;
+    int startYear;
+    int startMonth;
+    int startDay;
     int startHour;
     int startMinutes;
+    int endYear;
+    int endMonth;
+    int endDay;
     int endHour;
     int endMinutes;
     String frostProtectionOn;
@@ -71,6 +77,22 @@ public class R10_ActivityLog {
         this.endMinutes = endMinutes;
         System.out.println("Auto Time Interval Schedule has been changed to: Date - " + year + "-" + month + "-" + day +
                 ", with Starting Time - " + startHour + ":" + startMinutes + " and Ending Time - " + endHour + ":" + endMinutes);
+        return true;
+    }
+
+    public boolean HolidayTimeIntervalScheduleChangeIsSuccessfullyLogged(int startYear, int startMonth, int startDay, int startHour, int startMinutes, int endYear, int endMonth, int endDay, int endHour, int endMinutes) {
+        this.startYear = startYear;
+        this.startMonth = startMonth;
+        this.startDay = startDay;
+        this.startHour = startHour;
+        this.startMinutes = startMinutes;
+        this.endYear = endYear;
+        this.endMonth = endMonth;
+        this.endDay = endDay;
+        this.endHour = endHour;
+        this.endMinutes = endMinutes;
+        System.out.println("Auto Time Interval Schedule has been changed to: Date - " + startYear + "-" + startMonth + "-" + startDay +
+                startHour + ":" + startMinutes + " and will end on - " + endYear + endMonth + endDay + endHour + ":" + endMinutes);
         return true;
     }
 

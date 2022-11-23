@@ -60,7 +60,7 @@ class R4_HolidayScheduleTest {
         int startHour = 6;
         int startMinutes = 30;
         int endYear = 2022;
-        int endMonth = 11;
+        int endMonth = 12;
         int endDay = 19;
         int endHour = 8;
         int endMinutes = 30;

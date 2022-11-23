@@ -3,7 +3,8 @@ package cs3500;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class R5_BoostTargetTempTest {
@@ -17,26 +18,43 @@ class R5_BoostTargetTempTest {
 
 
     @Test
-    @DisplayName("Boost temp array is empty!")
+    @DisplayName("Boost Target Temperature array is empty when created.")
     void boostTargetTempArrayIsEmpty() {
+
         assertTrue(boostTargetTemp.size() == 0);
     }
 
     @Test
-    @DisplayName("A single push results in a stack size of one.")
-        void singlePush (){
-        R5_BoostTargetTemp testBoostTargetTemp = new R5_BoostTargetTemp();
-        testBoostTargetTemp.push(4);
-        assertEquals(1, testBoostTargetTemp.size(),"Item pushed onto stack" );
+    @DisplayName("Push four values onto arraylist and return an array size of 4")
+    void pushExpectedValuesGivesArraySizeOfFour(){
+        int EXPECTED_TARGET_TEMP_VALUE = 20;
+        while (boostTargetTemp.size() < 4) {
+            boostTargetTemp.push(EXPECTED_TARGET_TEMP_VALUE);
+            EXPECTED_TARGET_TEMP_VALUE += 2;
+        }
+        assertEquals(4, boostTargetTemp.size());
+
     }
 
+    @Test
+    @DisplayName("User selects value from the arrayList of Boost Target Temperatures and it returns true")
+    void testSelectFromArrayList() {
+        int SELECTED_VALUE = 22;
+        assertTrue(boostTargetTemp.contains(SELECTED_VALUE));
+    }
 
+    @Test
+    @DisplayName("User selects value below first value in the arrayList of Boost Target Temperatures and it returns false")
+    void testInvalidLowerValueFromArrayList() {
+        int SELECTED_VALUE = 19;
+        assertFalse(boostTargetTemp.contains(SELECTED_VALUE));
+    }
 
+    @Test
+    @DisplayName("User selects value above last value the arrayList of Boost Target Temperatures and it returns false")
+    void testInvalidHigherValueFromArrayList() {
+        int SELECTED_VALUE = 27;
+        assertFalse(boostTargetTemp.contains(SELECTED_VALUE));
+    }
 
-    // Test push values onto arraylist
-    //[20, 22, 24, 26]
-
-// Next test would be user selects one of those values from the arraylist and it must return that value/find value in arraylist.
-
-    //user selects a vlaue outside the array (19 or 27) and that would throw exception.
 }

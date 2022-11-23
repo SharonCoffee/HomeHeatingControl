@@ -15,15 +15,9 @@ class R20_BoostThermometerTest {
         boostThermostat = new R20_BoostThermometer();
     }
 
-
-/*
-    write junit5 tests in Java where boost state is on and current temperature is below target temperature and boost state is set for one hour.
-    Assertions.assertTrue(currentTemperature.isBelowTargetTemperature());
-    Assertions.assertTrue(boostState.getDurationInHours() == 1);
-*/
-
     @Test
-    void testBoostOnAndCurrentTempBelowTargetTempAndBoostSetForOneHour() {
+    @DisplayName("Test if boost is on and current room temperature is below target room temperature and boost state is set for 60 minutes.")
+    void testBoostOnAndCurrentRoomTempBelowTargetRoomTempAndBoostSetForOneHour() {
         // Arrange
         int currentRoomTemp = 14;
         int targetRoomTemp = 22;
@@ -43,72 +37,49 @@ class R20_BoostThermometerTest {
 
 
     @Test
-    void testBoostStateOnAndCurrentTemperatureAboveTargetTemperatureAndBoostStateSetForOneHour() {
+    @DisplayName("Test if boost state is off and current room temeprature above target room temperature and boost state set for 60 minutes")
+    void testBoostStateOffAndCurrentRoomTemperatureAboveTargetRoomTemperatureAndBoostStateSetForOneHour() {
         // Arrange
         int currentRoomTemperature = 30;
         int targetRoomTemperature = 20;
         int boostDuration = 60; // in minutes
 
-        // Act
-        int newTemperature = boostThermostat.setBoostState(currentRoomTemperature, targetRoomTemperature, boostDuration);
-
-        // Assert
-        assertEquals(newTemperature, targetRoomTemperature + 1);
+        assertEquals(boostThermostat.isOff(), true);
     }
-/*
+
+
     @Test
-    void testBoostStateOnAndCurrentTemperatureAboveTargetTemperatureAndBoostStateSetForOneHour() {
+    @DisplayName("Test if boost is on and current water temperature is below target water temperature and boost state is set for 60 minutes.")
+    void testBoostOnAndCurrentWaterTempBelowTargetWaterTempAndBoostSetForOneHour() {
         // Arrange
-        double currentTemperature = 30.0;
-        double targetTemperature = 20.0;
-        int boostDuration = 1;
+        int currentWaterTemp = 35;
+        int targetWaterTemp = 60;
+        int boostDuration = 60; // in minutes
 
         // Act
-        double newTemperature = thermostat.setBoostState(currentTemperature, targetTemperature, boostDuration);
+        assertTrue(boostThermostat.isOn());
+        int boostTimeRemaining;
+        for (boostTimeRemaining = 0; boostTimeRemaining < boostDuration; boostTimeRemaining++ ) {
+            boostThermostat.setBoostTimeRemaining(boostTimeRemaining);
+        }
 
         // Assert
-        assertEquals(newTemperature, targetTemperature + 1);
+        assertEquals(boostThermostat.isOn(), true);
+        assertEquals(boostTimeRemaining, boostDuration);
     }
 
-    write junit5 tests in Java where boost state is on and current temperature is above target temperature and boost state is set for one hour after one hour boost state turns off.
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+    @Test
+    @DisplayName("Test if boost state is off and current water temperature above target water temperature and boost state set for 60 minutes")
+    void testBoostStateOffAndCurrentWaterTemperatureAboveTargetWaterTemperatureAndBoostStateSetForOneHour() {
+        // Arrange
+        int currentWaterTemperature = 70;
+        int targetWaterTemperature = 60;
+        int boostDuration = 60; // in minutes
 
-import org.junit.jupiter.api.Test;
-
-    public class BoostStateTest {
-
-        @Test
-        public void testBoostStateOn() {
-            // arrange
-            double currentTemperature = 25;
-            double targetTemperature = 20;
-            int boostTime = 1; // in hours
-
-            // act
-            boolean boostState = BoostState.isBoostStateOn(currentTemperature, targetTemperature, boostTime);
-
-            // assert
-            assertEquals(true, boostState);
-        }
-
-        @Test
-        public void testBoostStateOff() {
-            // arrange
-            double currentTemperature = 25;
-            double targetTemperature = 20;
-            int boostTime = 2; // in hours
-
-            // act
-            boolean boostState = BoostState.isBoostStateOn(currentTemperature, targetTemperature, boostTime);
-
-            // assert
-            assertEquals(false, boostState);
-        }
-
+        assertEquals(boostThermostat.isOff(), true);
     }
 
- */
 
 
 

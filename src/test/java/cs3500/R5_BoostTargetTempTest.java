@@ -39,13 +39,23 @@ class R5_BoostTargetTempTest {
     @Test
     @DisplayName("User selects value from the arrayList of Boost Target Temperatures and it returns true")
     void testSelectFromArrayList() {
-        int SELECTED_VALUE = 22;
-        assertTrue(boostTargetTemp.contains(SELECTED_VALUE));
+        int EXPECTED_TARGET_TEMP_VALUE = 20;
+        while (boostTargetTemp.size() < 4) {
+            boostTargetTemp.push(EXPECTED_TARGET_TEMP_VALUE);
+            EXPECTED_TARGET_TEMP_VALUE += 2;
+        }
+        int iBOOST_TARGET_TEMP = 22;
+        assertTrue(boostTargetTemp.contains(iBOOST_TARGET_TEMP));
     }
 
     @Test
     @DisplayName("User selects value below first value in the arrayList of Boost Target Temperatures and it returns false")
     void testInvalidLowerValueFromArrayList() {
+        int EXPECTED_TARGET_TEMP_VALUE = 20;
+        while (boostTargetTemp.size() < 4) {
+            boostTargetTemp.push(EXPECTED_TARGET_TEMP_VALUE);
+            EXPECTED_TARGET_TEMP_VALUE += 2;
+        }
         int SELECTED_VALUE = 19;
         assertFalse(boostTargetTemp.contains(SELECTED_VALUE));
     }
@@ -53,6 +63,11 @@ class R5_BoostTargetTempTest {
     @Test
     @DisplayName("User selects value above last value the arrayList of Boost Target Temperatures and it returns false")
     void testInvalidHigherValueFromArrayList() {
+        int EXPECTED_TARGET_TEMP_VALUE = 20;
+        while (boostTargetTemp.size() < 4) {
+            boostTargetTemp.push(EXPECTED_TARGET_TEMP_VALUE);
+            EXPECTED_TARGET_TEMP_VALUE += 2;
+        }
         int SELECTED_VALUE = 27;
         assertFalse(boostTargetTemp.contains(SELECTED_VALUE));
     }

@@ -3,7 +3,7 @@ package cs3500;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class R5_BoostTargetTempTest {
@@ -23,9 +23,11 @@ class R5_BoostTargetTempTest {
     }
 
     @Test
-    @DisplayName("Push values onto arraylist")
-        void boostTargetTempArry(){
-
+    @DisplayName("A single push results in a stack size of one.")
+        void singlePush (){
+        R5_BoostTargetTemp testBoostTargetTemp = new R5_BoostTargetTemp();
+        testBoostTargetTemp.push(4);
+        assertEquals(1, testBoostTargetTemp.size(),"Item pushed onto stack" );
     }
 
 

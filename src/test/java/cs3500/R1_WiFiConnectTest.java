@@ -31,9 +31,9 @@ class R1_WiFiConnectTest {
         // user entered below string
         String actualValue = "ThisIsMyPassword";
         if (ENTERED_PASSWORD != actualValue) {
-            WiFiConnect.getMessage();
+            WiFiConnect.getInvalidMessage();
         }
-        assertTrue(WiFiConnect.getMessage() == "Invalid Password entered.");
+        assertTrue(WiFiConnect.getInvalidMessage() == "Invalid Password entered.");
     }
 
 

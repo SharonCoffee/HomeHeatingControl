@@ -6,7 +6,7 @@ package cs3500;
  * @return returns string message "Invalid Password Entered."
  */
 public class R1_WiFiConnect {
-    public String getMessage() {
+    public String getInvalidMessage() {
         return "Invalid Password entered.";
     }
 }

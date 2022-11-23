@@ -8,19 +8,15 @@ public class R14_TargetRoomTemp {
 
     int cMinRoomTemp = 18;
     public int setTargetRoomTemp(int iTargetRoomTemperature) {
-
         vTargetRoomTemperature = iTargetRoomTemperature;
-
         return vTargetRoomTemperature;
     }
 
     public int getTargetRoomTemp() {
-
         return vTargetRoomTemperature;
     }
 
     public int increaseTargetRoomTemp() {
-
         if (vTargetRoomTemperature < cMaxRoomTemp) {
             vTargetRoomTemperature += 1;
         }
@@ -28,7 +24,6 @@ public class R14_TargetRoomTemp {
     }
 
     public int decreaseTargetRoomTemp() {
-
         if (vTargetRoomTemperature > cMinRoomTemp) {
         vTargetRoomTemperature -= 1;
         }

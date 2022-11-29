@@ -4,9 +4,18 @@ public class R14_TargetRoomTemp {
 
     int vTargetRoomTemperature = 18;
 
-    int cMaxRoomTemp = 26;
+    final static int cMaxRoomTemp = 26;
 
-    int cMinRoomTemp = 18;
+    final static int cMinRoomTemp = 18;
+
+    public static int getcMaxRoomTemp() {
+        return cMaxRoomTemp;
+    }
+
+    public static int getcMinRoomTemp() {
+        return cMinRoomTemp;
+    }
+
     public int setTargetRoomTemp(int iTargetRoomTemperature) {
         vTargetRoomTemperature = iTargetRoomTemperature;
         return vTargetRoomTemperature;

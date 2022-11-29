@@ -4,9 +4,17 @@ public class R15_TargetWaterTemp {
 
     int vTargetWaterTemp = 55;
 
-    int cMinWaterTemp = 55;
+    static final int cMinWaterTemp = 55;
 
-    int cMaxWaterTemp = 80;
+    static final int cMaxWaterTemp = 80;
+
+    public static int getcMaxWaterTemp() {
+        return cMaxWaterTemp;
+    }
+
+    public static int getcMinWaterTemp() {
+        return cMinWaterTemp;
+    }
 
     public int setTargetWaterTemp(int iTargetWaterTemp) {
 

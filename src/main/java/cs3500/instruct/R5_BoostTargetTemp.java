@@ -1,29 +1,34 @@
 package cs3500.instruct;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class R5_BoostTargetTemp {
 
-    private List<Integer> boostTargetTempList;
+    private int[] boostTargetTempArray;
 
     public R5_BoostTargetTemp() {
-        boostTargetTempList = new ArrayList<>();
+        this.boostTargetTempArray = new int[] {20, 22, 24, 26};
     }
 
-    public int size() {
-
-        //return 0;             this is done initially, but then it is changed later in the video to:
-        return boostTargetTempList.size();
+    public int[] getBoostTargetTempArray() {
+        return boostTargetTempArray;
     }
 
-    public void push(int targetTempValue) {
-        boostTargetTempList.add(targetTempValue);
+    public void setBoostTargetTempArray(int[] boostTargetTempArray) {
+        this.boostTargetTempArray = boostTargetTempArray;
     }
+
+
+    public int getLengthOfArray() {
+        return boostTargetTempArray.length;
+    }
+
 
     public boolean contains(int selectedValue) {
-        for (int i = 0; i < boostTargetTempList.size(); i++) {
-            if (selectedValue == boostTargetTempList.get(i)) {
+        for (int i = 0; i < boostTargetTempArray.length; i++) {
+            if (selectedValue == boostTargetTempArray[i]) {
                 return true;
             } else {
                 continue;
@@ -32,4 +37,6 @@ public class R5_BoostTargetTemp {
         return false;
 
     }
+
+
 }

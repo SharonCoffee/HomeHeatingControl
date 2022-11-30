@@ -1,5 +1,6 @@
 package cs3500.swing;
 
+import cs3500.instruct.R5_BoostTargetTemp;
 import cs3500.operate.R14_TargetRoomTemp;
 import cs3500.operate.R15_TargetWaterTemp;
 
@@ -8,11 +9,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class UserInterface implements ActionListener {
 
     JFrame frame;
     JPanel panel;
-
+    JPanel panelA;
+    JPanel panelB;
+    JPanel panelC;
+    JPanel panelD;
     JLabel labelZone;
     JButton zoneOne;
     JButton zoneTwo;
@@ -24,6 +29,9 @@ public class UserInterface implements ActionListener {
     JButton zoneOff;
     JButton zoneAuto;
     JButton zoneBoost;
+    JLabel labelFrostProtection;
+    JButton frostOn;
+    JButton frostOff;
 
 
 
@@ -36,6 +44,13 @@ public class UserInterface implements ActionListener {
     JButton upButtonTargetWaterTemp;
     JButton downButtonTargetWaterTemp;
 
+    JLabel labelBoostTargetTemp;
+    JTextField textBoostTargetTemp;;
+    JButton upButtonBoostTargetTemp;;
+    JButton downButtonBoostTargetTemp;;
+
+    JTextField textAutoScheduleDateChooser;
+
     JButton buttonOk;
     JButton buttonApply;
     JButton buttonCancel;
@@ -43,6 +58,10 @@ public class UserInterface implements ActionListener {
 
     private int targetRoomTemperature = 19;
     private int targetWaterTemperature = 60;
+    private int boostTargetTemperature = 20;
+
+    R5_BoostTargetTemp boostTargetTempList = new R5_BoostTargetTemp();
+    private int[] boostTempList = boostTargetTempList.getBoostTargetTempArray();
     //int count = 0;
     public UserInterface() {
         frame = new JFrame();
@@ -58,19 +77,28 @@ public class UserInterface implements ActionListener {
         zoneAuto = new JButton("AUTO");
         zoneBoost = new JButton("BOOST");
 
+        frostOn = new JButton("ON");
+        frostOff = new JButton("OFF");
+
         textTargetRoomTemp = new JTextField("19", 2);
         upButtonTargetRoomTemp = new JButton("+");
         downButtonTargetRoomTemp = new JButton("-");
+
         textTargetWaterTemp = new JTextField("55", 2);
         upButtonTargetWaterTemp = new JButton("+");
         downButtonTargetWaterTemp = new JButton("-");
+
+        textBoostTargetTemp = new JTextField("20", 2);
+        upButtonBoostTargetTemp = new JButton("+");
+        downButtonBoostTargetTemp = new JButton("-");
+
+        textAutoScheduleDateChooser = new JTextField();
+        textAutoScheduleDateChooser.setPreferredSize(new Dimension(150,25));
+
+
         //buttonOk = new JButton("Ok");
         //buttonApply = new JButton("Apply");
         //buttonCancel = new JButton("Cancel");
-        upButtonTargetRoomTemp.addActionListener(this);
-        downButtonTargetRoomTemp.addActionListener(this);
-        upButtonTargetWaterTemp.addActionListener(this);
-        downButtonTargetWaterTemp.addActionListener(this);
         zoneOne.addActionListener(this);
         zoneTwo.addActionListener(this);
         zoneThree.addActionListener(this);
@@ -79,6 +107,15 @@ public class UserInterface implements ActionListener {
         zoneOff.addActionListener(this);
         zoneAuto.addActionListener(this);
         zoneBoost.addActionListener(this);
+        frostOn.addActionListener(this);
+        frostOff.addActionListener(this);
+        upButtonTargetRoomTemp.addActionListener(this);
+        downButtonTargetRoomTemp.addActionListener(this);
+        upButtonTargetWaterTemp.addActionListener(this);
+        downButtonTargetWaterTemp.addActionListener(this);
+        upButtonBoostTargetTemp.addActionListener(this);
+        downButtonBoostTargetTemp.addActionListener(this);
+
         //buttonOk.addActionListener(this);
         //buttonApply.addActionListener(this);
         //buttonCancel.addActionListener(this);
@@ -86,44 +123,71 @@ public class UserInterface implements ActionListener {
 
         labelZone = new JLabel("Select Zone:");
         labelZoneState = new JLabel("Select Program Mode:");
+        labelFrostProtection = new JLabel("Set Frost Protection:");
         labelTargetRoomTemp = new JLabel("Target Room Temperature:");
         labelTargetWaterTemp = new JLabel("Target Water Temperature:");
+        labelBoostTargetTemp = new JLabel("Boost Target Temperature:");
 
         panel = new JPanel();
-        //panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 300, 300));
-        panel.setPreferredSize(new Dimension(400, 250));
-        panel.setLayout(new FlowLayout());
+        panelA = new JPanel();
+        panelB = new JPanel();
+        panelC = new JPanel();
+        panelD = new JPanel();
 
-        //panel.setLayout(new GridLayout(10,7));
+        //panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 300, 300));
+        panelA.setPreferredSize(new Dimension(200, 10));
+        panelA.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelB.setPreferredSize(new Dimension(200, 10));
+        panelB.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelC.setPreferredSize(new Dimension(200, 10));
+        panelC.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelD.setPreferredSize(new Dimension(200, 10));
+        panelD.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panel.setPreferredSize(new Dimension(200, 50));
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        //panel.setLayout(new GridLayout(10, 5));
         //panel.add(buttonOk);
         //panel.add(label);
         //panel.add(buttonApply);
         //panel.add(buttonCancel);
-        panel.add(labelZone);
-        panel.add(zoneOne);
-        panel.add(zoneTwo);
-        panel.add(zoneThree);
-        panel.add(zoneFour);
-        panel.add(labelZoneState);
-        panel.add(zoneOn);
-        panel.add(zoneOff);
-        panel.add(zoneAuto);
-        panel.add(zoneBoost);
-        panel.add(labelTargetRoomTemp);
-        panel.add(textTargetRoomTemp);
-        panel.add(upButtonTargetRoomTemp);
-        panel.add(downButtonTargetRoomTemp);
-        panel.add(labelTargetWaterTemp);
-        panel.add(textTargetWaterTemp);
-        panel.add(upButtonTargetWaterTemp);
-        panel.add(downButtonTargetWaterTemp);
+        panelA.add(labelZone);
+        panelA.add(zoneOne);
+        panelA.add(zoneTwo);
+        panelA.add(zoneThree);
+        panelA.add(zoneFour);
+        panelB.add(labelZoneState);
+        panelB.add(zoneOn);
+        panelB.add(zoneOff);
+        panelB.add(zoneAuto);
+        panelB.add(zoneBoost);
+        panelA.add(labelFrostProtection);
+        panelA.add(frostOn);
+        panelA.add(frostOff);
+        panelC.add(labelTargetRoomTemp);
+        panelC.add(textTargetRoomTemp);
+        panelC.add(upButtonTargetRoomTemp);
+        panelC.add(downButtonTargetRoomTemp);
+        panelD.add(labelTargetWaterTemp);
+        panelD.add(textTargetWaterTemp);
+        panelD.add(upButtonTargetWaterTemp);
+        panelD.add(downButtonTargetWaterTemp);
+        panel.add(labelBoostTargetTemp);
+        panel.add(textBoostTargetTemp);
+        panel.add(upButtonBoostTargetTemp);
+        panel.add(downButtonBoostTargetTemp);
 
 
         //frame.add(panel, BorderLayout.CENTER);
+
+
+        frame.add(panelA);
+        frame.add(panelB);
+        frame.add(panelC);
+        frame.add(panelD);
         frame.add(panel);
-        frame.setSize(500, 300);
-        frame.setLayout(new GridLayout(10, 6));
-        frame.pack();
+        frame.setSize(1000, 300);
+        frame.setLayout(new GridLayout(10, 20));
+        //frame.pack();         // packs all panels into the frame.
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -158,6 +222,12 @@ public class UserInterface implements ActionListener {
         }
         if(event.getSource() == zoneBoost) {
             JOptionPane.showMessageDialog(frame, "The zone selected has been boosted.");
+        }
+        if(event.getSource() == frostOn) {
+            JOptionPane.showMessageDialog(frame, "Frost protection is selected");
+        }
+        if(event.getSource() == frostOff) {
+            JOptionPane.showMessageDialog(frame, "Frost protection is deselected");
         }
         if(event.getSource() == upButtonTargetRoomTemp) {
             //increase the target temperature by 1
@@ -203,6 +273,33 @@ public class UserInterface implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Target Water Temperature cannot be decreased below 55 degrees Celsius.");
             }
         }
+        if(event.getSource() == upButtonBoostTargetTemp) {
+            //increase the target temperature by 1
+            int lastItem = boostTempList[boostTempList.length - 1];
+            //int lastItem = 26;
+            if (boostTargetTemperature < lastItem) {
+                boostTargetTemperature += 2;
+                textBoostTargetTemp.setText("" + boostTargetTemperature);
+                JOptionPane.showMessageDialog(frame, "Boost Target Temperature: " + boostTargetTemperature);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Boost Target Temperature cannot be increased above 26 degrees Celsius.");
+            }
+        }
+        if(event.getSource() == downButtonBoostTargetTemp) {
+            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
+            //decrease the target temperature by 1
+            int firstItem = boostTempList[0];
+            //int firstItem = 20;
+            if (boostTargetTemperature > firstItem) {
+                boostTargetTemperature -= 2;
+                //set the text in the textField to the target temperature
+                textTargetRoomTemp.setText("" + boostTargetTemperature);
+                //show a dialog box with the target temperature
+                JOptionPane.showMessageDialog(frame, "Boost Target Temperature: " + boostTargetTemperature);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Boost Target Temperature cannot be decreased below 20 degrees Celsius.");
+            }
+        }
         if(event.getSource() == buttonOk) {
             JOptionPane.showMessageDialog(frame, "Action: Ok");
         }
@@ -213,11 +310,5 @@ public class UserInterface implements ActionListener {
             JOptionPane.showMessageDialog(frame, "Action: Cancelled");
         }
 
-
-
-
-
-
-
-    }
+   }
 }

@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class colourScheme {
 
-    private static Map<R13_ZoneStateEnum, colourScheme> colourMap = new TreeMap<R13_ZoneStateEnum, colourScheme>();
+    private static final Map<R13_ZoneStateEnum, colourScheme> colourMap = new TreeMap<>();
 
     public final Color BOTTOM;
     public final Color TOP;

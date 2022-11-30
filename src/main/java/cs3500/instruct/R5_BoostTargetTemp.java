@@ -6,13 +6,13 @@ import java.util.List;
 
 public class R5_BoostTargetTemp {
 
-    private int[] boostTargetTempArray;
+    private static int[] boostTargetTempArray;
 
     public R5_BoostTargetTemp() {
         this.boostTargetTempArray = new int[] {20, 22, 24, 26};
     }
 
-    public int[] getBoostTargetTempArray() {
+    public static int[] getBoostTargetTempArray() {
         return boostTargetTempArray;
     }
 

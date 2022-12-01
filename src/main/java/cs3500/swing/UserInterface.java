@@ -1,5 +1,6 @@
 package cs3500.swing;
 
+import cs3500.instruct.R3_AutoTimeSchedule;
 import cs3500.instruct.R5_BoostTargetTemp;
 import cs3500.instruct.R6_MinOilLevel;
 import cs3500.operate.R14_TargetRoomTemp;
@@ -21,6 +22,8 @@ public class UserInterface implements ActionListener {
     JPanel panelB;
     JPanel panelC;
     JPanel panelD;
+    JPanel panelE;
+    JPanel panelF;
     JLabel labelZone;
     JButton zoneOne;
     JButton zoneTwo;
@@ -66,8 +69,19 @@ public class UserInterface implements ActionListener {
 
     JLabel labelAutoTimeSchedule;
     JLabel labelAutoWeekDay;
-    JLabel labelAutoStartHour;
-    JLabel labelAutoEndHour;
+    JLabel labelSetAutoWeekDay;
+    JComboBox comboBoxAutoWeekDay;
+    JLabel labelAutoStartTime;
+    JComboBox comboBoxAutoStartHour;
+    JComboBox comboBoxAutoStartMinutes;
+    JLabel labelSetStartTime;
+    JLabel labelAutoEndTime;
+    JComboBox comboBoxAutoEndHour;
+    JComboBox comboBoxAutoEndMinutes;
+    JLabel labelSetEndTime;
+    JButton saveAutoTimeSchedule;
+    JButton cancelAutoTimeSchedule;
+
 
     JButton buttonOk;
     JButton buttonApply;
@@ -90,7 +104,13 @@ public class UserInterface implements ActionListener {
     R16_BoostTimes boostTimeScheduleList = new R16_BoostTimes();
     private int[] boostScheduleList = boostTimeScheduleList.getBoostTimeSchedule();
 
+    R3_AutoTimeSchedule autoTimeSchedules = new R3_AutoTimeSchedule();
 
+    private String[] autoWeekDayList = autoTimeSchedules.getWeekDays();
+    private int[] autoStartHoursList = autoTimeSchedules.getStartHours();
+    private int[] autoStartMinutesList = autoTimeSchedules.getStartMinutes();
+    private int[] autoEndHoursList = autoTimeSchedules.getEndHours();
+    private int[] autoEndMinutesList = autoTimeSchedules.getEndMinutes();
 
     //int count = 0;
     public UserInterface() {
@@ -133,6 +153,32 @@ public class UserInterface implements ActionListener {
         upButtonBoostSchedule = new JButton("+");
         downButtonBoostSchedule = new JButton("-");
 
+        comboBoxAutoWeekDay = new JComboBox(autoWeekDayList);
+        comboBoxAutoStartHour = new JComboBox();
+        for (int i = 0; i < 24; i++){
+            comboBoxAutoStartHour.addItem(i);
+        }
+        comboBoxAutoStartHour.setBounds(50, 50, 50, 20);
+        comboBoxAutoStartMinutes = new JComboBox();
+        for (int i = 0; i < 56; i++) {
+            comboBoxAutoStartMinutes.addItem(i);
+            i += 4;
+        }
+        comboBoxAutoStartMinutes.setBounds(50, 50, 50, 20);
+        comboBoxAutoEndHour = new JComboBox();
+        for (int i = 0; i < 24; i++){
+            comboBoxAutoEndHour.addItem(i);
+        }
+        comboBoxAutoEndHour.setBounds(50, 50, 50, 20);
+        comboBoxAutoEndMinutes = new JComboBox();
+        for (int i = 0; i < 56; i++) {
+            comboBoxAutoEndMinutes.addItem(i);
+            i += 4;
+        }
+        comboBoxAutoEndMinutes.setBounds(50, 50, 50, 20);
+        saveAutoTimeSchedule = new JButton("Save");
+        cancelAutoTimeSchedule = new JButton("Cancel");
+
         //textAutoScheduleDateChooser = new JTextField();
         //textAutoScheduleDateChooser.setPreferredSize(new Dimension(150,25));
 
@@ -163,6 +209,13 @@ public class UserInterface implements ActionListener {
         downButtonBoostSchedule.addActionListener(this);
         upButtonMinOilLevel.addActionListener(this);
         downButtonMinOilLevel.addActionListener(this);
+        saveAutoTimeSchedule.addActionListener(this);
+        cancelAutoTimeSchedule.addActionListener(this);
+        comboBoxAutoWeekDay.addActionListener(this);
+        comboBoxAutoStartMinutes.addActionListener(this);
+        comboBoxAutoStartHour.addActionListener(this);
+        comboBoxAutoEndHour.addActionListener(this);
+        comboBoxAutoEndMinutes.addActionListener(this);
 
         //buttonOk.addActionListener(this);
         //buttonApply.addActionListener(this);
@@ -180,8 +233,11 @@ public class UserInterface implements ActionListener {
         labelMinOilLevel = new JLabel("Minimum Oil Level Setting:");
         labelAutoTimeSchedule = new JLabel("Auto Time Schedule:");
         labelAutoWeekDay = new JLabel("Select a week day:");
-        labelAutoStartHour = new JLabel("Select a start hour:");
-        labelAutoEndHour = new JLabel("Select end hour:");
+        labelSetAutoWeekDay = new JLabel("");
+        labelAutoStartTime = new JLabel("Select start time:");
+        labelSetStartTime = new JLabel("");
+        labelAutoEndTime = new JLabel("Select end time:");
+        labelSetEndTime = new JLabel("");
 
 
         panel = new JPanel();
@@ -189,6 +245,8 @@ public class UserInterface implements ActionListener {
         panelB = new JPanel();
         panelC = new JPanel();
         panelD = new JPanel();
+        panelE = new JPanel();
+        panelF = new JPanel();
 
         //panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 300, 300));
         panelA.setPreferredSize(new Dimension(200, 10));
@@ -201,6 +259,10 @@ public class UserInterface implements ActionListener {
         panelD.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         panel.setPreferredSize(new Dimension(200, 50));
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelE.setPreferredSize(new Dimension(200, 10));
+        panelE.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelF.setPreferredSize(new Dimension(200, 50));
+        panelF.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         //panel.setLayout(new GridLayout(10, 5));
         //panel.add(buttonOk);
         //panel.add(label);
@@ -242,10 +304,20 @@ public class UserInterface implements ActionListener {
         panel.add(textMinOilLevel);
         panel.add(upButtonMinOilLevel);
         panel.add(downButtonMinOilLevel);
-        panel.add(labelAutoTimeSchedule);
-        panel.add(labelAutoWeekDay);
-        panel.add(labelAutoStartHour);
-        panel.add(labelAutoEndHour);
+        panelE.add(labelAutoTimeSchedule);
+        panelF.add(labelAutoWeekDay);
+        panelF.add(comboBoxAutoWeekDay);
+        panelF.add(labelSetAutoWeekDay);
+        panelF.add(labelAutoStartTime);
+        panelF.add(comboBoxAutoStartHour);
+        panelF.add(comboBoxAutoStartMinutes);
+        panelF.add(labelSetStartTime);
+        panelF.add(labelAutoEndTime);
+        panelF.add(comboBoxAutoEndHour);
+        panelF.add(comboBoxAutoEndMinutes);
+        panelF.add(labelSetEndTime);
+        panelF.add(saveAutoTimeSchedule);
+        panelF.add(cancelAutoTimeSchedule);
 
         //frame.add(panel, BorderLayout.CENTER);
 
@@ -255,6 +327,8 @@ public class UserInterface implements ActionListener {
         frame.add(panelC);
         frame.add(panelD);
         frame.add(panel);
+        frame.add(panelE);
+        frame.add(panelF);
         frame.setSize(1000, 300);
         frame.setLayout(new GridLayout(10, 20));
         frame.pack();         // packs all panels into the frame.
@@ -402,6 +476,26 @@ public class UserInterface implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "Minimum oil level cannot be set below 100L.");
             }
+        }
+        if(event.getSource() == comboBoxAutoWeekDay) {
+            String weekDay = (String)comboBoxAutoWeekDay.getSelectedItem();
+            labelSetAutoWeekDay.setText("Selected Weekday: "+ weekDay);
+        }
+        if(event.getSource() == comboBoxAutoStartHour || event.getSource() == comboBoxAutoStartMinutes) {
+            int startHour = (int) comboBoxAutoStartHour.getSelectedItem();
+            int startMinutes = (int) comboBoxAutoStartMinutes.getSelectedItem();
+            labelSetStartTime.setText("Selected Start Time: "+ startHour + ":" + startMinutes);
+        }
+        if(event.getSource() == comboBoxAutoEndHour || event.getSource() == comboBoxAutoEndMinutes) {
+            int endHour = (int)comboBoxAutoEndHour.getSelectedItem();
+            int endMinutes = (int)comboBoxAutoEndMinutes.getSelectedItem();
+            labelSetEndTime.setText("Selected End Time: "+ endHour + ":" + endMinutes);
+        }
+        if(event.getSource() == saveAutoTimeSchedule) {
+            JOptionPane.showMessageDialog(frame, "Auto Time Schedule has been saved");
+        }
+        if(event.getSource() == cancelAutoTimeSchedule) {
+            JOptionPane.showMessageDialog(frame, "Auto Time Schedule has been cancelled");
         }
         if(event.getSource() == buttonOk) {
             JOptionPane.showMessageDialog(frame, "Action: Ok");

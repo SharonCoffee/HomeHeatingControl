@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class R3_AutoTimeScheduleTest {
 
@@ -20,64 +20,156 @@ class R3_AutoTimeScheduleTest {
         autoTimeSchedule = new R3_AutoTimeSchedule();
     }
 
-
     @Test
-    @DisplayName("A new schedule should be empty")
-    void newScheduleIsEmpty() {
-
-        assertTrue(autoTimeSchedule.size() == 0);
-    }
-
-
-
-    @Test
-    @DisplayName("When start command is pushed onto the stack, the auto time schedule results in a stack size of one")
-    void testStart() {
-
-        final String EXPECTED_VALUE = "Start";
-        autoTimeSchedule.push(EXPECTED_VALUE);
-        assertEquals(1, autoTimeSchedule.size());
-    }
-
-
-    @Test
-    @DisplayName("When start command is pushed off the schedule, the schedule stops and returns the value that was pushed off")
-    void testStop() {
-
-        final String EXPECTED_VALUE = "Start";
-        autoTimeSchedule.push(EXPECTED_VALUE);
-        String actualValue = autoTimeSchedule.pop();
-        assertEquals(EXPECTED_VALUE, actualValue);
+    @DisplayName("Weekday array has a length of 7.")
+    void weekDayArrayHasLengthOfSeven() {
+        assertTrue(autoTimeSchedule.getLengthOfWeekDays() == 7);
     }
 
     @Test
-    @DisplayName("When start command is pushed off the schedule, the schedule size should be empty")
-    void testScheduleSizeAfterPop() {
-        testStop();
-        assertTrue(autoTimeSchedule.size() == 0);
+    @DisplayName("Start Hours array has a length of 24.")
+    void startHoursArrayHasLengthOfTwentyFour() {
+        assertTrue(autoTimeSchedule.getLengthOfStartHours() == 24);
     }
 
     @Test
-    @DisplayName("When Schedule has been set, get correct date, start time and end time from the schedule")
-    void whenScheduleSetGetCorrectDateAndTime() {
-        int year = 2022;
-        int month = 11;
-        int day = 19;
-        int startHour = 6;
-        int startMinutes = 30;
-        int endHour = 8;
-        int endMinutes = 30;
-        autoTimeSchedule.setDate(LocalDate.of(year, month, day));
-        autoTimeSchedule.setStartTime(LocalTime.of(startHour, startMinutes));
-        autoTimeSchedule.setEndTime(LocalTime.of(endHour, endMinutes));
-
-        assertEquals(LocalDate.of(year, month, day), autoTimeSchedule.getDate());
-        assertEquals(LocalTime.of(startHour, startMinutes), autoTimeSchedule.getStartTime());
-        assertEquals(LocalTime.of(endHour, endMinutes), autoTimeSchedule.getEndTime());
-
+    @DisplayName("Start Minutes array has a length of 12.")
+    void startMinutesArrayHasLengthOfTwelve() {
+        assertTrue(autoTimeSchedule.getLengthOfStartMinutes() == 12);
     }
 
-    // continue on from here
+
+    @Test
+    @DisplayName("End Hours array has a length of 24.")
+    void endHoursArrayHasLengthOfTwentyFour() {
+        assertTrue(autoTimeSchedule.getLengthOfEndHours() == 24);
+    }
+
+    @Test
+    @DisplayName("End Minutes array has a length of 12.")
+    void endMinutesArrayHasLengthOfTwelve() {
+        assertTrue(autoTimeSchedule.getLengthOfEndMinutes() == 12);
+    }
+
+    @Test
+    @DisplayName("User selects value from the list of weekdays and it returns true")
+    void testSelectFromWeekDaysList() {
+        String weekDayValue = "Tuesday";
+        assertTrue(autoTimeSchedule.containsWeekDays(weekDayValue));
+    }
+
+    @Test
+    @DisplayName("User selects value from the list of start hours and it returns true")
+    void testSelectFromStartHoursList() {
+        int startHoursValue = 10;
+        assertTrue(autoTimeSchedule.containsStartHours(startHoursValue));
+    }
 
 
+    @Test
+    @DisplayName("User selects value from the list of start minutes and it returns true")
+    void testSelectFromStartMinutesList() {
+        int startMinutesValue = 15;
+        assertTrue(autoTimeSchedule.containsStartMinutes(startMinutesValue));
+    }
+
+
+    @Test
+    @DisplayName("User selects value from the list of end hours and it returns true")
+    void testSelectFromEndHoursList() {
+        int endHoursValue = 12;
+        assertTrue(autoTimeSchedule.containsEndHours(endHoursValue));
+    }
+
+
+    @Test
+    @DisplayName("User selects value from the list of end minutes and it returns true")
+    void testSelectFromEndMinutesList() {
+        int endMinutesValue = 30;
+        assertTrue(autoTimeSchedule.containsEndMinutes(endMinutesValue));
+    }
+
+    @Test
+    @DisplayName("User selects value outside the start or end hours and it returns false")
+    void testInvalidStartAndEndHoursSelected() {
+        int SELECTED_START_HOURS_VALUE = 24;
+        int SELECTED_END_HOURS_VALUE = 25;
+        assertFalse(autoTimeSchedule.containsStartHours(SELECTED_START_HOURS_VALUE));
+        assertFalse(autoTimeSchedule.containsEndHours(SELECTED_END_HOURS_VALUE));
+    }
+
+    @Test
+    @DisplayName("User selects value outside the start or end minutes and it returns false")
+    void testInvalidHigherValueFromArrayList() {
+        int SELECTED_START_MINUTES_VALUE = 1;
+        int SELECTED_END_MINUTES_VALUE = 59;
+        assertFalse(autoTimeSchedule.containsStartMinutes(SELECTED_START_MINUTES_VALUE));
+        assertFalse(autoTimeSchedule.containsEndMinutes(SELECTED_END_MINUTES_VALUE));
+    }
+
+    @Test
+    @DisplayName("Test get weekdays list returns weekday list")
+    void testGetWeekDays() {
+        assertArrayEquals(new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}, autoTimeSchedule.getWeekDays());
+    }
+
+    @Test
+    @DisplayName("Test set weekdays list returns weekday list")
+    void testSetWeekDays() {
+        autoTimeSchedule.setWeekDays(new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"});
+        assertArrayEquals(new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}, autoTimeSchedule.getWeekDays());
+    }
+
+    @Test
+    @DisplayName("Test get start hours list returns start hours list")
+    void testGetStartHours() {
+        assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23}, autoTimeSchedule.getStartHours());
+    }
+
+    @Test
+    @DisplayName("Test set start hours list returns start hours list")
+    void testSetStartHours() {
+        autoTimeSchedule.setStartHours(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23});
+        assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23}, autoTimeSchedule.getStartHours());
+    }
+
+    @Test
+    @DisplayName("Test get start minutes list returns start minutes list")
+    void testGetStartMinutes() {
+        assertArrayEquals(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55}, autoTimeSchedule.getStartMinutes());
+    }
+
+    @Test
+    @DisplayName("Test set start minutes list returns start minutes list")
+    void testSetStartMinutes() {
+        autoTimeSchedule.setStartMinutes(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55});
+        assertArrayEquals(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55}, autoTimeSchedule.getStartMinutes());
+    }
+
+
+    @Test
+    @DisplayName("Test get end hours list returns end hours list")
+    void testGetEndHours() {
+        assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23}, autoTimeSchedule.getEndHours());
+    }
+
+    @Test
+    @DisplayName("Test set end hours list returns end hours list")
+    void testSetEndHours() {
+        autoTimeSchedule.setEndHours(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23});
+        assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23}, autoTimeSchedule.getEndHours());
+    }
+
+    @Test
+    @DisplayName("Test get end minutes list returns end minutes list")
+    void testGetEndMinutes() {
+        assertArrayEquals(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55}, autoTimeSchedule.getEndMinutes());
+    }
+
+    @Test
+    @DisplayName("Test set end minutes list returns end minutes list")
+    void testSetEndMinutes() {
+        autoTimeSchedule.setEndMinutes(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55});
+        assertArrayEquals(new int[] {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55}, autoTimeSchedule.getEndMinutes());
+    }
 }

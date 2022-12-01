@@ -1,13 +1,16 @@
 package cs3500.swing;
 
 import cs3500.instruct.R5_BoostTargetTemp;
+import cs3500.instruct.R6_MinOilLevel;
 import cs3500.operate.R14_TargetRoomTemp;
 import cs3500.operate.R15_TargetWaterTemp;
+import cs3500.operate.R16_BoostTimes;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 
 public class UserInterface implements ActionListener {
@@ -33,7 +36,9 @@ public class UserInterface implements ActionListener {
     JButton frostOn;
     JButton frostOff;
 
-
+    JLabel labelAlerts;
+    JButton alertsOn;
+    JButton alertsOff;
 
     JLabel labelTargetRoomTemp;
     JTextField textTargetRoomTemp;
@@ -45,11 +50,24 @@ public class UserInterface implements ActionListener {
     JButton downButtonTargetWaterTemp;
 
     JLabel labelBoostTargetTemp;
-    JTextField textBoostTargetTemp;;
-    JButton upButtonBoostTargetTemp;;
-    JButton downButtonBoostTargetTemp;;
+    JTextField textBoostTargetTemp;
+    JButton upButtonBoostTargetTemp;
+    JButton downButtonBoostTargetTemp;
 
-    JTextField textAutoScheduleDateChooser;
+    JLabel labelBoostSchedule;
+    JTextField textBoostSchedule;
+    JButton upButtonBoostSchedule;
+    JButton downButtonBoostSchedule;
+
+    JLabel labelMinOilLevel;
+    JTextField textMinOilLevel;
+    JButton upButtonMinOilLevel;
+    JButton downButtonMinOilLevel;
+
+    JLabel labelAutoTimeSchedule;
+    JLabel labelAutoWeekDay;
+    JLabel labelAutoStartHour;
+    JLabel labelAutoEndHour;
 
     JButton buttonOk;
     JButton buttonApply;
@@ -59,9 +77,21 @@ public class UserInterface implements ActionListener {
     private int targetRoomTemperature = 19;
     private int targetWaterTemperature = 60;
     private int boostTargetTemperature = 20;
+    private int minOilLevel = 100;
+
+    private int boostTime = 60;
 
     R5_BoostTargetTemp boostTargetTempList = new R5_BoostTargetTemp();
     private int[] boostTempList = boostTargetTempList.getBoostTargetTempArray();
+
+    R6_MinOilLevel minOilLevelList = new R6_MinOilLevel();
+    private int[] minOilList = minOilLevelList.getMinOilLevelArray();
+
+    R16_BoostTimes boostTimeScheduleList = new R16_BoostTimes();
+    private int[] boostScheduleList = boostTimeScheduleList.getBoostTimeSchedule();
+
+
+
     //int count = 0;
     public UserInterface() {
         frame = new JFrame();
@@ -80,6 +110,9 @@ public class UserInterface implements ActionListener {
         frostOn = new JButton("ON");
         frostOff = new JButton("OFF");
 
+        alertsOn = new JButton("ON");
+        alertsOff = new JButton("OFF");
+
         textTargetRoomTemp = new JTextField("19", 2);
         upButtonTargetRoomTemp = new JButton("+");
         downButtonTargetRoomTemp = new JButton("-");
@@ -92,8 +125,17 @@ public class UserInterface implements ActionListener {
         upButtonBoostTargetTemp = new JButton("+");
         downButtonBoostTargetTemp = new JButton("-");
 
-        textAutoScheduleDateChooser = new JTextField();
-        textAutoScheduleDateChooser.setPreferredSize(new Dimension(150,25));
+        textMinOilLevel = new JTextField("100", 2);
+        upButtonMinOilLevel = new JButton("+");
+        downButtonMinOilLevel = new JButton("-");
+
+        textBoostSchedule = new JTextField("60", 2);
+        upButtonBoostSchedule = new JButton("+");
+        downButtonBoostSchedule = new JButton("-");
+
+        //textAutoScheduleDateChooser = new JTextField();
+        //textAutoScheduleDateChooser.setPreferredSize(new Dimension(150,25));
+
 
 
         //buttonOk = new JButton("Ok");
@@ -109,12 +151,18 @@ public class UserInterface implements ActionListener {
         zoneBoost.addActionListener(this);
         frostOn.addActionListener(this);
         frostOff.addActionListener(this);
+        alertsOn.addActionListener(this);
+        alertsOff.addActionListener(this);
         upButtonTargetRoomTemp.addActionListener(this);
         downButtonTargetRoomTemp.addActionListener(this);
         upButtonTargetWaterTemp.addActionListener(this);
         downButtonTargetWaterTemp.addActionListener(this);
         upButtonBoostTargetTemp.addActionListener(this);
         downButtonBoostTargetTemp.addActionListener(this);
+        upButtonBoostSchedule.addActionListener(this);
+        downButtonBoostSchedule.addActionListener(this);
+        upButtonMinOilLevel.addActionListener(this);
+        downButtonMinOilLevel.addActionListener(this);
 
         //buttonOk.addActionListener(this);
         //buttonApply.addActionListener(this);
@@ -124,9 +172,17 @@ public class UserInterface implements ActionListener {
         labelZone = new JLabel("Select Zone:");
         labelZoneState = new JLabel("Select Program Mode:");
         labelFrostProtection = new JLabel("Set Frost Protection:");
+        labelAlerts = new JLabel("Set Alerts:");
         labelTargetRoomTemp = new JLabel("Target Room Temperature:");
         labelTargetWaterTemp = new JLabel("Target Water Temperature:");
         labelBoostTargetTemp = new JLabel("Boost Target Temperature:");
+        labelBoostSchedule = new JLabel("Boost Time Schedule Setting:");
+        labelMinOilLevel = new JLabel("Minimum Oil Level Setting:");
+        labelAutoTimeSchedule = new JLabel("Auto Time Schedule:");
+        labelAutoWeekDay = new JLabel("Select a week day:");
+        labelAutoStartHour = new JLabel("Select a start hour:");
+        labelAutoEndHour = new JLabel("Select end hour:");
+
 
         panel = new JPanel();
         panelA = new JPanel();
@@ -171,11 +227,25 @@ public class UserInterface implements ActionListener {
         panelD.add(textTargetWaterTemp);
         panelD.add(upButtonTargetWaterTemp);
         panelD.add(downButtonTargetWaterTemp);
+        panel.add(labelAlerts);
+        panel.add(alertsOn);
+        panel.add(alertsOff);
         panel.add(labelBoostTargetTemp);
         panel.add(textBoostTargetTemp);
         panel.add(upButtonBoostTargetTemp);
         panel.add(downButtonBoostTargetTemp);
-
+        panel.add(labelBoostSchedule);
+        panel.add(textBoostSchedule);
+        panel.add(upButtonBoostSchedule);
+        panel.add(downButtonBoostSchedule);
+        panel.add(labelMinOilLevel);
+        panel.add(textMinOilLevel);
+        panel.add(upButtonMinOilLevel);
+        panel.add(downButtonMinOilLevel);
+        panel.add(labelAutoTimeSchedule);
+        panel.add(labelAutoWeekDay);
+        panel.add(labelAutoStartHour);
+        panel.add(labelAutoEndHour);
 
         //frame.add(panel, BorderLayout.CENTER);
 
@@ -228,6 +298,12 @@ public class UserInterface implements ActionListener {
         }
         if(event.getSource() == frostOff) {
             JOptionPane.showMessageDialog(frame, "Frost protection is deselected");
+        }
+        if(event.getSource() == alertsOn) {
+            JOptionPane.showMessageDialog(frame, "Alert messages will be sent.");
+        }
+        if(event.getSource() == alertsOff) {
+            JOptionPane.showMessageDialog(frame, "Alert messages will not be sent");
         }
         if(event.getSource() == upButtonTargetRoomTemp) {
             //increase the target temperature by 1
@@ -298,6 +374,60 @@ public class UserInterface implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature: " + boostTargetTemperature);
             } else {
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature cannot be decreased below 20 degrees Celsius.");
+            }
+        }
+        if(event.getSource() == upButtonBoostSchedule) {
+            //increase the target temperature by 1
+            int lastItem = boostScheduleList[boostScheduleList.length - 1];
+            //int lastItem = 26;
+            if (boostTime < lastItem) {
+                boostTime += 60;
+                textBoostSchedule.setText("" + boostTime);
+                JOptionPane.showMessageDialog(frame, "Boost Time Schedule: " + boostTime);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Boost Time Schedule cannot be set higher than 180 minutes.");
+            }
+        }
+        if(event.getSource() == downButtonBoostSchedule) {
+            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
+            //decrease the target temperature by 1
+            int firstItem = boostScheduleList[0];
+            //int firstItem = 20;
+            if (boostTime > firstItem) {
+                boostTime -= 60;
+                //set the text in the textField to the target temperature
+                textBoostSchedule.setText("" + boostTime);
+                //show a dialog box with the target temperature
+                JOptionPane.showMessageDialog(frame, "Boost Time Schedule: " + boostTime);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Boost Time Schedule cannot be set lower than 60 minutes.");
+            }
+        }
+        if(event.getSource() == upButtonMinOilLevel) {
+            //increase the target temperature by 1
+            int lastItem = minOilList[minOilList.length - 1];
+            //int lastItem = 26;
+            if (minOilLevel < lastItem) {
+                minOilLevel += 100;
+                textMinOilLevel.setText("" + minOilLevel);
+                JOptionPane.showMessageDialog(frame, "Minimum oil level: " + minOilLevel);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Minimum oil level cannot be set above 500L.");
+            }
+        }
+        if(event.getSource() == downButtonMinOilLevel) {
+            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
+            //decrease the target temperature by 1
+            int firstItem = minOilList[0];
+            //int firstItem = 20;
+            if (minOilLevel > firstItem) {
+                minOilLevel -= 100;
+                //set the text in the textField to the target temperature
+                textMinOilLevel.setText("" + minOilLevel);
+                //show a dialog box with the target temperature
+                JOptionPane.showMessageDialog(frame, "Minimum oil level: " + minOilLevel);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Minimum oil level cannot be set below 100L.");
             }
         }
         if(event.getSource() == buttonOk) {

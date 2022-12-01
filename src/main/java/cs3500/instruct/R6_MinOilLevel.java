@@ -4,55 +4,36 @@ import java.util.ArrayList;
 
 public class R6_MinOilLevel {
 
-    public ArrayList<Integer> oilLevel;
-    public final int cMIN_OIL_LEVEL = 0;
-    public final int cMAX_OIL_LEVEL = 0;
+    private static int[] minOilLevelArray;
 
     public R6_MinOilLevel() {
-        oilLevel = new ArrayList<>();
+        this.minOilLevelArray = new int[] {100, 200, 300, 400, 500};
     }
-    public int size() {
-        return oilLevel.size();
-    }
-
-    public void push(int oilLevelValue) {
-        oilLevel.add(oilLevelValue);
+    public static int[] getMinOilLevelArray() {
+        return minOilLevelArray;
     }
 
-    public String message(String textMessage) {
-        textMessage = "Minimum oil level has been reached.";
-        return textMessage;
+    public void setMinOilLevelArray(int[] minOilLevelArray) {
+        this.minOilLevelArray = minOilLevelArray;
     }
 
-    public void addOilLevels(int minOilLevelValue, int maxOilLevelValue) {
-        if (minOilLevelValue < cMIN_OIL_LEVEL) {
-            oilLevelTooLow("Oil level selected below minimum oil level value.");
-        } else if (maxOilLevelValue > cMAX_OIL_LEVEL) {
-            oilLevelTooHigh("Oil level selected above maximum oil level value.");
-        } else {
-            for (int i = minOilLevelValue; i <= maxOilLevelValue; i++) {
-                oilLevel.add(i);
-            }
-        }
+
+    public int getLengthOfArray() {
+        return minOilLevelArray.length;
     }
 
-    private String oilLevelTooHigh(String maximumMessage) {
-        return maximumMessage;
-    }
 
-    private String oilLevelTooLow(String minimumMessage) {
-        return minimumMessage;
-    }
-
-    public boolean contains(int vMinOilLevel) {
-        for (int i = 0; i < oilLevel.size(); i++) {
-            if (vMinOilLevel == oilLevel.get(i)) {
+    public boolean contains(int selectedValue) {
+        for (int i = 0; i < minOilLevelArray.length; i++) {
+            if (selectedValue == minOilLevelArray[i]) {
                 return true;
             } else {
                 continue;
             }
         }
         return false;
+
     }
+
 
 }

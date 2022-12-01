@@ -22,14 +22,7 @@ class R5_BoostTargetTempTest {
 
         assertTrue(boostTargetTemp.getLengthOfArray() == 4);
     }
-/*
-    @Test
-    @DisplayName("Push four values onto arraylist and return an array size of 4")
-    void pushExpectedValuesGivesArraySizeOfFour(){
-        assertEquals(4, boostTargetTemp.getLengthOfArray());
 
-    }
-*/
     @Test
     @DisplayName("User selects value from the arrayList of Boost Target Temperatures and it returns true")
     void testSelectFromArrayList() {

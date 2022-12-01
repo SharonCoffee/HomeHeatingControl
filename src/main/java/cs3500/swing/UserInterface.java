@@ -330,7 +330,7 @@ public class UserInterface implements ActionListener {
         if(event.getSource() == upButtonTargetWaterTemp) {
             //increase the target temperature by 1
             if (targetWaterTemperature < R15_TargetWaterTemp.getcMaxWaterTemp()) {
-                targetWaterTemperature++;
+                targetWaterTemperature+=5;
                 textTargetWaterTemp.setText("" + targetWaterTemperature);
                 JOptionPane.showMessageDialog(frame, "Target Water Temperature: " + targetWaterTemperature);
             } else {
@@ -340,7 +340,7 @@ public class UserInterface implements ActionListener {
         if(event.getSource() == downButtonTargetWaterTemp) {
             //decrease the target temperature by 1
             if (targetWaterTemperature > R15_TargetWaterTemp.getcMinWaterTemp()) {
-                targetWaterTemperature--;
+                targetWaterTemperature-=5;
                 //set the text in the textField to the target temperature
                 textTargetWaterTemp.setText("" + targetWaterTemperature);
                 //show a dialog box with the target temperature

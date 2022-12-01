@@ -117,7 +117,7 @@ public class UserInterface implements ActionListener {
         upButtonTargetRoomTemp = new JButton("+");
         downButtonTargetRoomTemp = new JButton("-");
 
-        textTargetWaterTemp = new JTextField("55", 2);
+        textTargetWaterTemp = new JTextField("60", 2);
         upButtonTargetWaterTemp = new JButton("+");
         downButtonTargetWaterTemp = new JButton("-");
 
@@ -257,7 +257,7 @@ public class UserInterface implements ActionListener {
         frame.add(panel);
         frame.setSize(1000, 300);
         frame.setLayout(new GridLayout(10, 20));
-        //frame.pack();         // packs all panels into the frame.
+        frame.pack();         // packs all panels into the frame.
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -319,18 +319,15 @@ public class UserInterface implements ActionListener {
             //decrease the target temperature by 1
             if (targetRoomTemperature > R14_TargetRoomTemp.getcMinRoomTemp()) {
                 targetRoomTemperature--;
-                //set the text in the textField to the target temperature
                 textTargetRoomTemp.setText("" + targetRoomTemperature);
-                //show a dialog box with the target temperature
                 JOptionPane.showMessageDialog(frame, "Target Room Temperature: " + targetRoomTemperature);
             } else {
                 JOptionPane.showMessageDialog(frame, "Target Room Temperature cannot be decreased below 18 degrees Celsius.");
             }
         }
         if(event.getSource() == upButtonTargetWaterTemp) {
-            //increase the target temperature by 1
             if (targetWaterTemperature < R15_TargetWaterTemp.getcMaxWaterTemp()) {
-                targetWaterTemperature+=5;
+                targetWaterTemperature += 5;
                 textTargetWaterTemp.setText("" + targetWaterTemperature);
                 JOptionPane.showMessageDialog(frame, "Target Water Temperature: " + targetWaterTemperature);
             } else {
@@ -338,21 +335,16 @@ public class UserInterface implements ActionListener {
             }
         }
         if(event.getSource() == downButtonTargetWaterTemp) {
-            //decrease the target temperature by 1
             if (targetWaterTemperature > R15_TargetWaterTemp.getcMinWaterTemp()) {
-                targetWaterTemperature-=5;
-                //set the text in the textField to the target temperature
+                targetWaterTemperature -= 5;
                 textTargetWaterTemp.setText("" + targetWaterTemperature);
-                //show a dialog box with the target temperature
                 JOptionPane.showMessageDialog(frame, "Target Water Temperature: " + targetWaterTemperature);
             } else {
                 JOptionPane.showMessageDialog(frame, "Target Water Temperature cannot be decreased below 55 degrees Celsius.");
             }
         }
         if(event.getSource() == upButtonBoostTargetTemp) {
-            //increase the target temperature by 1
             int lastItem = boostTempList[boostTempList.length - 1];
-            //int lastItem = 26;
             if (boostTargetTemperature < lastItem) {
                 boostTargetTemperature += 2;
                 textBoostTargetTemp.setText("" + boostTargetTemperature);
@@ -362,24 +354,17 @@ public class UserInterface implements ActionListener {
             }
         }
         if(event.getSource() == downButtonBoostTargetTemp) {
-            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
-            //decrease the target temperature by 1
             int firstItem = boostTempList[0];
-            //int firstItem = 20;
             if (boostTargetTemperature > firstItem) {
                 boostTargetTemperature -= 2;
-                //set the text in the textField to the target temperature
                 textTargetRoomTemp.setText("" + boostTargetTemperature);
-                //show a dialog box with the target temperature
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature: " + boostTargetTemperature);
             } else {
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature cannot be decreased below 20 degrees Celsius.");
             }
         }
         if(event.getSource() == upButtonBoostSchedule) {
-            //increase the target temperature by 1
             int lastItem = boostScheduleList[boostScheduleList.length - 1];
-            //int lastItem = 26;
             if (boostTime < lastItem) {
                 boostTime += 60;
                 textBoostSchedule.setText("" + boostTime);
@@ -389,24 +374,17 @@ public class UserInterface implements ActionListener {
             }
         }
         if(event.getSource() == downButtonBoostSchedule) {
-            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
-            //decrease the target temperature by 1
             int firstItem = boostScheduleList[0];
-            //int firstItem = 20;
             if (boostTime > firstItem) {
                 boostTime -= 60;
-                //set the text in the textField to the target temperature
                 textBoostSchedule.setText("" + boostTime);
-                //show a dialog box with the target temperature
                 JOptionPane.showMessageDialog(frame, "Boost Time Schedule: " + boostTime);
             } else {
                 JOptionPane.showMessageDialog(frame, "Boost Time Schedule cannot be set lower than 60 minutes.");
             }
         }
         if(event.getSource() == upButtonMinOilLevel) {
-            //increase the target temperature by 1
             int lastItem = minOilList[minOilList.length - 1];
-            //int lastItem = 26;
             if (minOilLevel < lastItem) {
                 minOilLevel += 100;
                 textMinOilLevel.setText("" + minOilLevel);
@@ -416,15 +394,10 @@ public class UserInterface implements ActionListener {
             }
         }
         if(event.getSource() == downButtonMinOilLevel) {
-            //Object firstItem = R5_BoostTargetTemp.boostTargetTempArray[0];
-            //decrease the target temperature by 1
             int firstItem = minOilList[0];
-            //int firstItem = 20;
             if (minOilLevel > firstItem) {
                 minOilLevel -= 100;
-                //set the text in the textField to the target temperature
                 textMinOilLevel.setText("" + minOilLevel);
-                //show a dialog box with the target temperature
                 JOptionPane.showMessageDialog(frame, "Minimum oil level: " + minOilLevel);
             } else {
                 JOptionPane.showMessageDialog(frame, "Minimum oil level cannot be set below 100L.");

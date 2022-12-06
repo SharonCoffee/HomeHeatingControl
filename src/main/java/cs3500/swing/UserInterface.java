@@ -167,7 +167,6 @@ public class UserInterface implements ActionListener {
     private final String[] serviceMonth = serviceScheduleList.getMonth();
     private final int[] serviceYear = serviceScheduleList.getYear();
 
-    //int count = 0;
     public UserInterface() {
         frame = new JFrame();
         frame.setTitle("Home Heating Control System");
@@ -259,8 +258,6 @@ public class UserInterface implements ActionListener {
         saveHolidaySchedule = new JButton("Save");
         cancelHolidaySchedule = new JButton("Cancel");
 
-
-        // Start here
         comboBoxServiceDay = new JComboBox();
         for (int i = 1; i < 31; i++){
             comboBoxServiceDay.addItem(i);
@@ -276,10 +273,10 @@ public class UserInterface implements ActionListener {
 
         buttonGenerate = new JButton("Generate Activity Log");
 
+        buttonOk = new JButton("Ok");
+        buttonApply = new JButton("Apply");
+        buttonCancel = new JButton("Cancel");
 
-        //buttonOk = new JButton("Ok");
-        //buttonApply = new JButton("Apply");
-        //buttonCancel = new JButton("Cancel");
         zoneOne.addActionListener(this);
         zoneTwo.addActionListener(this);
         zoneThree.addActionListener(this);
@@ -328,10 +325,9 @@ public class UserInterface implements ActionListener {
 
         buttonGenerate.addActionListener(this);
 
-        //buttonOk.addActionListener(this);
-        //buttonApply.addActionListener(this);
-        //buttonCancel.addActionListener(this);
-        //JLabel label = new JLabel("");
+        buttonOk.addActionListener(this);
+        buttonApply.addActionListener(this);
+        buttonCancel.addActionListener(this);
 
         labelZone = new JLabel("Select Zone:");
         labelZoneState = new JLabel("Select Program Mode:");
@@ -364,6 +360,7 @@ public class UserInterface implements ActionListener {
         panelG = new JPanel();
         panelH = new JPanel();
         panelI = new JPanel();
+        panelJ = new JPanel();
 
         //panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 300, 300));
         panelA.setPreferredSize(new Dimension(200, 10));
@@ -386,11 +383,9 @@ public class UserInterface implements ActionListener {
         panelH.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         panelI.setPreferredSize(new Dimension(200, 50));
         panelI.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
-        //panel.setLayout(new GridLayout(10, 5));
-        //panel.add(buttonOk);
-        //panel.add(label);
-        //panel.add(buttonApply);
-        //panel.add(buttonCancel);
+        panelJ.setPreferredSize(new Dimension(200, 50));
+        panelJ.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+
         panelA.add(labelZone);
         panelA.add(zoneOne);
         panelA.add(zoneTwo);
@@ -459,7 +454,9 @@ public class UserInterface implements ActionListener {
         panelG.add(cancelServiceSchedule);
         panelH.add(labelActivityLog);
         panelH.add(buttonGenerate);
-
+        panelJ.add(buttonOk);
+        panelJ.add(buttonApply);
+        panelJ.add(buttonCancel);
         //frame.add(panel, BorderLayout.CENTER);
 
         frame.add(panelI);
@@ -472,7 +469,8 @@ public class UserInterface implements ActionListener {
         frame.add(panelF);
         frame.add(panelG);
         frame.add(panelH);
-        frame.setSize(1000, 1000);
+        frame.add(panelJ);
+        frame.setSize(2000, 1000);
         frame.setLayout(new GridLayout(20, 20));
         frame.pack();         // packs all panels into the frame.
         frame.setVisible(true);
@@ -574,7 +572,7 @@ public class UserInterface implements ActionListener {
             int firstItem = boostTempList[0];
             if (boostTargetTemperature > firstItem) {
                 boostTargetTemperature -= 2;
-                textTargetRoomTemp.setText("" + boostTargetTemperature);
+                textBoostTargetTemp.setText("" + boostTargetTemperature);
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature: " + boostTargetTemperature);
             } else {
                 JOptionPane.showMessageDialog(frame, "Boost Target Temperature cannot be decreased below 20 degrees Celsius.");
@@ -632,6 +630,7 @@ public class UserInterface implements ActionListener {
         if(event.getSource() == comboBoxAutoEndHour || event.getSource() == comboBoxAutoEndMinutes) {
             endHour = (int)comboBoxAutoEndHour.getSelectedItem();
             endMinutes = (int)comboBoxAutoEndMinutes.getSelectedItem();
+
             //JOptionPane.showMessageDialog(frame, "Selected End Time: "+ endHour + ":" + endMinutes);
             //JOptionPane.showMessageDialog(frame, "End Hour cannot be set before start hour.");
         }

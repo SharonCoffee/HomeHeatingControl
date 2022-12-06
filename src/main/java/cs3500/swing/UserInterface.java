@@ -1,8 +1,6 @@
 package cs3500.swing;
 
-import cs3500.instruct.R3_AutoTimeSchedule;
-import cs3500.instruct.R5_BoostTargetTemp;
-import cs3500.instruct.R6_MinOilLevel;
+import cs3500.instruct.*;
 import cs3500.operate.R14_TargetRoomTemp;
 import cs3500.operate.R15_TargetWaterTemp;
 import cs3500.operate.R16_BoostTimes;
@@ -24,6 +22,11 @@ public class UserInterface implements ActionListener {
     JPanel panelD;
     JPanel panelE;
     JPanel panelF;
+    JPanel panelG;
+    JPanel panelH;
+    JPanel panelI;
+    JPanel panelJ;
+
     JLabel labelZone;
     JButton zoneOne;
     JButton zoneTwo;
@@ -67,7 +70,6 @@ public class UserInterface implements ActionListener {
     JButton upButtonMinOilLevel;
     JButton downButtonMinOilLevel;
 
-    JLabel labelAutoTimeSchedule;
     JLabel labelAutoWeekDay;
     JLabel labelSetAutoWeekDay;
     JComboBox comboBoxAutoWeekDay;
@@ -82,6 +84,27 @@ public class UserInterface implements ActionListener {
     JButton saveAutoTimeSchedule;
     JButton cancelAutoTimeSchedule;
 
+    JLabel labelHolidaySchedule;
+    JLabel labelSetStartHolidayTime;
+    JComboBox comboBoxStartHolidayDay;
+    JComboBox comboBoxStartHolidayMonth;
+    JComboBox comboBoxStartHolidayYear;
+    JLabel labelSetEndHolidayTime;
+    JComboBox comboBoxEndHolidayDay;
+    JComboBox comboBoxEndHolidayMonth;
+    JComboBox comboBoxEndHolidayYear;
+    JButton saveHolidaySchedule;
+    JButton cancelHolidaySchedule;
+
+    JLabel labelServiceSchedule;
+    JComboBox comboBoxServiceDay;
+    JComboBox comboBoxServiceMonth;
+    JComboBox comboBoxServiceYear;
+    JButton saveServiceSchedule;
+    JButton cancelServiceSchedule;
+
+    JLabel labelActivityLog;
+    JButton buttonGenerate;
 
     JButton buttonOk;
     JButton buttonApply;
@@ -95,22 +118,54 @@ public class UserInterface implements ActionListener {
 
     private int boostTime = 60;
 
+    private String weekDay = "";
+    private int startHour = 0;
+
+    private int startMinutes = 0;
+    private int endHour = 0;
+    private int endMinutes = 0;
+
+    private int startDay = 0;
+    private String startMonth = "";
+    private int startYear = 0;
+    private int endDay = 0;
+    private String endMonth = "";
+    private int endYear = 0;
+
+    private int day = 0;
+    private String month = "";
+    private int year = 0;
+
     R5_BoostTargetTemp boostTargetTempList = new R5_BoostTargetTemp();
-    private int[] boostTempList = boostTargetTempList.getBoostTargetTempArray();
+    private final int[] boostTempList = boostTargetTempList.getBoostTargetTempArray();
 
-    R6_MinOilLevel minOilLevelList = new R6_MinOilLevel();
-    private int[] minOilList = minOilLevelList.getMinOilLevelArray();
 
-    R16_BoostTimes boostTimeScheduleList = new R16_BoostTimes();
-    private int[] boostScheduleList = boostTimeScheduleList.getBoostTimeSchedule();
+    R6_MinOilLevel minimumOilLevelList = new R6_MinOilLevel();
+    private final int[] minOilList = minimumOilLevelList.getMinOilLevelArray();
 
-    R3_AutoTimeSchedule autoTimeSchedules = new R3_AutoTimeSchedule();
+    R16_BoostTimes boostTimesScheduleList = new R16_BoostTimes();
+    private final int[] boostScheduleList = boostTimesScheduleList.getBoostTimeSchedule();
 
-    private String[] autoWeekDayList = autoTimeSchedules.getWeekDays();
-    private int[] autoStartHoursList = autoTimeSchedules.getStartHours();
-    private int[] autoStartMinutesList = autoTimeSchedules.getStartMinutes();
-    private int[] autoEndHoursList = autoTimeSchedules.getEndHours();
-    private int[] autoEndMinutesList = autoTimeSchedules.getEndMinutes();
+    R3_AutoTimeSchedule autoTimeScheduleList = new R3_AutoTimeSchedule();
+    private final String[] autoWeekDayList = autoTimeScheduleList.getWeekDays();
+    private final int[] autoStartHoursList = autoTimeScheduleList.getStartHours();
+    private final int[] autoStartMinutesList = autoTimeScheduleList.getStartMinutes();
+    private final int[] autoEndHoursList = autoTimeScheduleList.getEndHours();
+    private final int[] autoEndMinutesList = autoTimeScheduleList.getEndMinutes();
+
+    R4_HolidaySchedule holidayScheduleList = new R4_HolidaySchedule();
+
+    private final int[] startHolidayDay = holidayScheduleList.getStartDay();
+    private final String[] startHolidayMonth = holidayScheduleList.getStartMonth();
+    private final int[] startHolidayYear = holidayScheduleList.getStartYear();
+    private final int[] endHolidayDay = holidayScheduleList.getEndDay();
+    private final String[] endHolidayMonth = holidayScheduleList.getEndMonth();
+    private final int[] endHolidayYear = holidayScheduleList.getEndYear();
+
+    R7_ServiceSchedule serviceScheduleList = new R7_ServiceSchedule();
+    private final int[] serviceDay = serviceScheduleList.getDay();
+    private final String[] serviceMonth = serviceScheduleList.getMonth();
+    private final int[] serviceYear = serviceScheduleList.getYear();
 
     //int count = 0;
     public UserInterface() {
@@ -154,6 +209,7 @@ public class UserInterface implements ActionListener {
         downButtonBoostSchedule = new JButton("-");
 
         comboBoxAutoWeekDay = new JComboBox(autoWeekDayList);
+
         comboBoxAutoStartHour = new JComboBox();
         for (int i = 0; i < 24; i++){
             comboBoxAutoStartHour.addItem(i);
@@ -179,9 +235,46 @@ public class UserInterface implements ActionListener {
         saveAutoTimeSchedule = new JButton("Save");
         cancelAutoTimeSchedule = new JButton("Cancel");
 
-        //textAutoScheduleDateChooser = new JTextField();
-        //textAutoScheduleDateChooser.setPreferredSize(new Dimension(150,25));
+        comboBoxStartHolidayDay = new JComboBox();
+        for (int i = 1; i < 31; i++){
+            comboBoxStartHolidayDay.addItem(i);
+        }
+        comboBoxStartHolidayDay.setBounds(50, 50, 50, 20);
+        comboBoxStartHolidayMonth = new JComboBox(startHolidayMonth);
+        comboBoxStartHolidayYear = new JComboBox();
+        for (int i = 2022; i < 2050; i++) {
+            comboBoxStartHolidayYear.addItem(i);
+        }
+        comboBoxStartHolidayYear.setBounds(50, 50, 50, 20);
+        comboBoxEndHolidayDay = new JComboBox();
+        for (int i = 1; i < 31; i++){
+            comboBoxEndHolidayDay.addItem(i);
+        }
+        comboBoxEndHolidayDay.setBounds(50, 50, 50, 20);
+        comboBoxEndHolidayMonth = new JComboBox(endHolidayMonth);
+        comboBoxEndHolidayYear = new JComboBox();
+        for (int i = 2022; i < 2050; i++) {
+            comboBoxEndHolidayYear.addItem(i);
+        }
+        saveHolidaySchedule = new JButton("Save");
+        cancelHolidaySchedule = new JButton("Cancel");
 
+
+        // Start here
+        comboBoxServiceDay = new JComboBox();
+        for (int i = 1; i < 31; i++){
+            comboBoxServiceDay.addItem(i);
+        }
+        comboBoxServiceDay.setBounds(50, 50, 50, 20);
+        comboBoxServiceMonth = new JComboBox(serviceMonth);
+        comboBoxServiceYear = new JComboBox();
+        for (int i = 2022; i < 2050; i++) {
+            comboBoxServiceYear.addItem(i);
+        }
+        saveServiceSchedule = new JButton("Save");
+        cancelServiceSchedule = new JButton("Cancel");
+
+        buttonGenerate = new JButton("Generate Activity Log");
 
 
         //buttonOk = new JButton("Ok");
@@ -209,13 +302,31 @@ public class UserInterface implements ActionListener {
         downButtonBoostSchedule.addActionListener(this);
         upButtonMinOilLevel.addActionListener(this);
         downButtonMinOilLevel.addActionListener(this);
-        saveAutoTimeSchedule.addActionListener(this);
-        cancelAutoTimeSchedule.addActionListener(this);
+
         comboBoxAutoWeekDay.addActionListener(this);
         comboBoxAutoStartMinutes.addActionListener(this);
         comboBoxAutoStartHour.addActionListener(this);
         comboBoxAutoEndHour.addActionListener(this);
         comboBoxAutoEndMinutes.addActionListener(this);
+        saveAutoTimeSchedule.addActionListener(this);
+        cancelAutoTimeSchedule.addActionListener(this);
+
+        comboBoxStartHolidayDay.addActionListener(this);
+        comboBoxStartHolidayMonth.addActionListener(this);
+        comboBoxStartHolidayYear.addActionListener(this);
+        comboBoxEndHolidayDay.addActionListener(this);
+        comboBoxEndHolidayMonth.addActionListener(this);
+        comboBoxEndHolidayYear.addActionListener(this);
+        saveHolidaySchedule.addActionListener(this);
+        cancelHolidaySchedule.addActionListener(this);
+
+        comboBoxServiceDay.addActionListener(this);
+        comboBoxServiceMonth.addActionListener(this);
+        comboBoxServiceYear.addActionListener(this);
+        saveServiceSchedule.addActionListener(this);
+        cancelServiceSchedule.addActionListener(this);
+
+        buttonGenerate.addActionListener(this);
 
         //buttonOk.addActionListener(this);
         //buttonApply.addActionListener(this);
@@ -231,14 +342,17 @@ public class UserInterface implements ActionListener {
         labelBoostTargetTemp = new JLabel("Boost Target Temperature:");
         labelBoostSchedule = new JLabel("Boost Time Schedule Setting:");
         labelMinOilLevel = new JLabel("Minimum Oil Level Setting:");
-        labelAutoTimeSchedule = new JLabel("Auto Time Schedule:");
-        labelAutoWeekDay = new JLabel("Select a week day:");
+        labelAutoWeekDay = new JLabel("Auto Time Schedule: Weekday: ");
         labelSetAutoWeekDay = new JLabel("");
-        labelAutoStartTime = new JLabel("Select start time:");
+        labelAutoStartTime = new JLabel("From start time:");
         labelSetStartTime = new JLabel("");
-        labelAutoEndTime = new JLabel("Select end time:");
+        labelAutoEndTime = new JLabel("To end time:");
         labelSetEndTime = new JLabel("");
-
+        labelHolidaySchedule = new JLabel("Holiday Schedule:");
+        labelSetStartHolidayTime = new JLabel("From:");
+        labelSetEndHolidayTime = new JLabel("To:");
+        labelServiceSchedule = new JLabel("Boiler and Radiator Service Schedule:");
+        labelActivityLog = new JLabel("Activity Log.");
 
         panel = new JPanel();
         panelA = new JPanel();
@@ -247,6 +361,9 @@ public class UserInterface implements ActionListener {
         panelD = new JPanel();
         panelE = new JPanel();
         panelF = new JPanel();
+        panelG = new JPanel();
+        panelH = new JPanel();
+        panelI = new JPanel();
 
         //panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 300, 300));
         panelA.setPreferredSize(new Dimension(200, 10));
@@ -263,6 +380,12 @@ public class UserInterface implements ActionListener {
         panelE.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         panelF.setPreferredSize(new Dimension(200, 50));
         panelF.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelG.setPreferredSize(new Dimension(200, 50));
+        panelG.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelH.setPreferredSize(new Dimension(200, 50));
+        panelH.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
+        panelI.setPreferredSize(new Dimension(200, 50));
+        panelI.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         //panel.setLayout(new GridLayout(10, 5));
         //panel.add(buttonOk);
         //panel.add(label);
@@ -304,24 +427,42 @@ public class UserInterface implements ActionListener {
         panel.add(textMinOilLevel);
         panel.add(upButtonMinOilLevel);
         panel.add(downButtonMinOilLevel);
-        panelE.add(labelAutoTimeSchedule);
-        panelF.add(labelAutoWeekDay);
-        panelF.add(comboBoxAutoWeekDay);
-        panelF.add(labelSetAutoWeekDay);
-        panelF.add(labelAutoStartTime);
-        panelF.add(comboBoxAutoStartHour);
-        panelF.add(comboBoxAutoStartMinutes);
-        panelF.add(labelSetStartTime);
-        panelF.add(labelAutoEndTime);
-        panelF.add(comboBoxAutoEndHour);
-        panelF.add(comboBoxAutoEndMinutes);
-        panelF.add(labelSetEndTime);
-        panelF.add(saveAutoTimeSchedule);
-        panelF.add(cancelAutoTimeSchedule);
+        panelE.add(labelAutoWeekDay);
+        panelE.add(comboBoxAutoWeekDay);
+        panelE.add(labelSetAutoWeekDay);
+        panelE.add(labelAutoStartTime);
+        panelE.add(comboBoxAutoStartHour);
+        panelE.add(comboBoxAutoStartMinutes);
+        panelE.add(labelSetStartTime);
+        panelE.add(labelAutoEndTime);
+        panelE.add(comboBoxAutoEndHour);
+        panelE.add(comboBoxAutoEndMinutes);
+        panelE.add(labelSetEndTime);
+        panelE.add(saveAutoTimeSchedule);
+        panelE.add(cancelAutoTimeSchedule);
+        panelF.add(labelHolidaySchedule);
+        panelF.add(labelSetStartHolidayTime);
+        panelF.add(comboBoxStartHolidayDay);
+        panelF.add(comboBoxStartHolidayMonth);
+        panelF.add(comboBoxStartHolidayYear);
+        panelF.add(labelSetEndHolidayTime);
+        panelF.add(comboBoxEndHolidayDay);
+        panelF.add(comboBoxEndHolidayMonth);
+        panelF.add(comboBoxEndHolidayYear);
+        panelF.add(saveHolidaySchedule);
+        panelF.add(cancelHolidaySchedule);
+        panelG.add(labelServiceSchedule);
+        panelG.add(comboBoxServiceDay);
+        panelG.add(comboBoxServiceMonth);
+        panelG.add(comboBoxServiceYear);
+        panelG.add(saveServiceSchedule);
+        panelG.add(cancelServiceSchedule);
+        panelH.add(labelActivityLog);
+        panelH.add(buttonGenerate);
 
         //frame.add(panel, BorderLayout.CENTER);
 
-
+        frame.add(panelI);
         frame.add(panelA);
         frame.add(panelB);
         frame.add(panelC);
@@ -329,8 +470,10 @@ public class UserInterface implements ActionListener {
         frame.add(panel);
         frame.add(panelE);
         frame.add(panelF);
-        frame.setSize(1000, 300);
-        frame.setLayout(new GridLayout(10, 20));
+        frame.add(panelG);
+        frame.add(panelH);
+        frame.setSize(1000, 1000);
+        frame.setLayout(new GridLayout(20, 20));
         frame.pack();         // packs all panels into the frame.
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -477,26 +620,83 @@ public class UserInterface implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Minimum oil level cannot be set below 100L.");
             }
         }
-        if(event.getSource() == comboBoxAutoWeekDay) {
-            String weekDay = (String)comboBoxAutoWeekDay.getSelectedItem();
-            labelSetAutoWeekDay.setText("Selected Weekday: "+ weekDay);
+        if (event.getSource() == comboBoxAutoWeekDay) {
+            weekDay = (String) comboBoxAutoWeekDay.getSelectedItem();
+            //JOptionPane.showMessageDialog(frame, "Selected Weekday: " + weekDay);
         }
-        if(event.getSource() == comboBoxAutoStartHour || event.getSource() == comboBoxAutoStartMinutes) {
-            int startHour = (int) comboBoxAutoStartHour.getSelectedItem();
-            int startMinutes = (int) comboBoxAutoStartMinutes.getSelectedItem();
-            labelSetStartTime.setText("Selected Start Time: "+ startHour + ":" + startMinutes);
+        if (event.getSource() == comboBoxAutoStartHour || event.getSource() == comboBoxAutoStartMinutes) {
+            startHour = (int) comboBoxAutoStartHour.getSelectedItem();
+            startMinutes = (int) comboBoxAutoStartMinutes.getSelectedItem();
+            //JOptionPane.showMessageDialog(frame, "Selected Start Time: "+ startHour + ":" + startMinutes);
         }
         if(event.getSource() == comboBoxAutoEndHour || event.getSource() == comboBoxAutoEndMinutes) {
-            int endHour = (int)comboBoxAutoEndHour.getSelectedItem();
-            int endMinutes = (int)comboBoxAutoEndMinutes.getSelectedItem();
-            labelSetEndTime.setText("Selected End Time: "+ endHour + ":" + endMinutes);
+            endHour = (int)comboBoxAutoEndHour.getSelectedItem();
+            endMinutes = (int)comboBoxAutoEndMinutes.getSelectedItem();
+            //JOptionPane.showMessageDialog(frame, "Selected End Time: "+ endHour + ":" + endMinutes);
+            //JOptionPane.showMessageDialog(frame, "End Hour cannot be set before start hour.");
         }
         if(event.getSource() == saveAutoTimeSchedule) {
-            JOptionPane.showMessageDialog(frame, "Auto Time Schedule has been saved");
+            JOptionPane.showMessageDialog(frame, "Selected schedule: " + weekDay + " with start time: " + startHour + ":" + startMinutes + " and end time: " + endHour + ":" + endMinutes + ".\nAuto Time Schedule has been saved");
         }
         if(event.getSource() == cancelAutoTimeSchedule) {
+            comboBoxAutoStartHour.setSelectedItem(0);
+            comboBoxAutoStartMinutes.setSelectedItem(0);
+            comboBoxAutoEndHour.setSelectedItem(0);
+            comboBoxAutoEndMinutes.setSelectedItem(0);
             JOptionPane.showMessageDialog(frame, "Auto Time Schedule has been cancelled");
         }
+        if(event.getSource() == comboBoxStartHolidayDay) {
+            startDay = (int) comboBoxStartHolidayDay.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxStartHolidayMonth) {
+            startMonth = (String) comboBoxStartHolidayMonth.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxStartHolidayYear) {
+            startYear = (int) comboBoxStartHolidayYear.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxEndHolidayDay) {
+            endDay = (int) comboBoxEndHolidayDay.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxEndHolidayMonth) {
+            endMonth = (String) comboBoxEndHolidayMonth.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxEndHolidayYear) {
+            endYear = (int) comboBoxEndHolidayYear.getSelectedItem();
+        }
+        if(event.getSource() == saveHolidaySchedule) {
+            JOptionPane.showMessageDialog(frame, "Holiday schedule from: " + startDay + "-" + startMonth + "-" + startYear + " to: " + endDay + "-" + endMonth + "-" + endYear + " is selected.\nHoliday Schedule has been saved");
+        }
+        if(event.getSource() == cancelHolidaySchedule) {
+            comboBoxStartHolidayDay.setSelectedItem(1);
+            comboBoxStartHolidayMonth.setSelectedItem("January");
+            comboBoxStartHolidayYear.setSelectedItem(2022);
+            comboBoxEndHolidayDay.setSelectedItem(1);
+            comboBoxEndHolidayMonth.setSelectedItem("January");
+            comboBoxEndHolidayYear.setSelectedItem(2023);
+            JOptionPane.showMessageDialog(frame, "Holiday Schedule has been cancelled");
+        }
+        if(event.getSource() == comboBoxServiceDay) {
+            day = (int) comboBoxServiceDay.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxServiceMonth) {
+            month = (String) comboBoxServiceMonth.getSelectedItem();
+        }
+        if(event.getSource() == comboBoxServiceYear) {
+            year = (int) comboBoxServiceYear.getSelectedItem();
+        }
+        if(event.getSource() == saveServiceSchedule) {
+            JOptionPane.showMessageDialog(frame, "Service date selected: " + day + "-" + month + "-" + year + "\nService Schedule has been saved");
+        }
+        if(event.getSource() == cancelServiceSchedule) {
+            comboBoxServiceDay.setSelectedItem(1);
+            comboBoxServiceMonth.setSelectedItem("January");
+            comboBoxServiceYear.setSelectedItem(2023);
+            JOptionPane.showMessageDialog(frame, "Service Schedule has been cancelled");
+        }
+        if(event.getSource() == buttonGenerate) {
+            JOptionPane.showMessageDialog(frame, "Activity Log has been generated.\nAn email with the report link has been sent.");
+        }
+
         if(event.getSource() == buttonOk) {
             JOptionPane.showMessageDialog(frame, "Action: Ok");
         }
